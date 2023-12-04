@@ -1,0 +1,8 @@
+@mixin card-hover {
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: var(--shadow);
+    transform: scale(1.02);
+  }
+}
