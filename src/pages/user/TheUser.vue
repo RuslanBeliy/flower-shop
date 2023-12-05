@@ -3,6 +3,9 @@ import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseAvatar from '@/components/ui/BaseAvatar.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
+import UserIcon from '@/components/icons/UserIcon.vue';
+import BagIcon from '@/components/icons/BagIcon.vue';
+import { routes } from '@/router.ts';
 </script>
 
 <template>
@@ -25,14 +28,18 @@ import BaseButton from '@/components/ui/BaseButton.vue';
           <nav class="nav">
             <ul class="nav__list">
               <li>
-                <RouterLink to="/">Моя информация</RouterLink>
+                <RouterLink :to="{ name: routes.userInfo }"
+                  ><UserIcon /> Моя информация</RouterLink
+                >
               </li>
               <li>
-                <RouterLink to="/">Заказы</RouterLink>
+                <RouterLink :to="{ name: routes.userOrders }"
+                  ><BagIcon /> Заказы</RouterLink
+                >
               </li>
             </ul>
           </nav>
-          <p>Contact with us</p>
+          <p class="sidebar__contact">Связаться с нами</p>
         </aside>
 
         <div class="main-info">
@@ -50,15 +57,18 @@ import BaseButton from '@/components/ui/BaseButton.vue';
 
 .wrapper {
   display: flex;
-  padding: 0 60px 0 30px;
   background: var(--white-color);
   border-radius: 5px;
 }
 
 .sidebar {
-  padding: 30px 0;
+  padding: 30px;
   width: 330px;
-  border-right: 1px solid var(--third-color);
+  flex-shrink: 0;
+
+  &__contact {
+    font-size: 22px;
+  }
 }
 
 .user-data {
@@ -78,9 +88,10 @@ import BaseButton from '@/components/ui/BaseButton.vue';
 }
 
 .nav {
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 
   &__list {
+    padding-left: 30px;
     font-size: 22px;
 
     li {
@@ -90,8 +101,38 @@ import BaseButton from '@/components/ui/BaseButton.vue';
     }
 
     a {
-      padding: 20px 0;
+      gap: 10px;
+      padding: 15px 0;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: var(--primary-color);
+
+        svg {
+          fill: var(--primary-color);
+          transition: all 0.2s ease;
+        }
+      }
+
+      svg {
+        width: 20px;
+        height: 22px;
+        fill: var(--secondary-color);
+        margin-right: 5px;
+      }
+
+      &.router-link-active {
+        color: var(--primary-color);
+
+        svg {
+          fill: var(--primary-color);
+        }
+      }
     }
   }
+}
+
+.main-info {
+  flex-grow: 1;
 }
 </style>

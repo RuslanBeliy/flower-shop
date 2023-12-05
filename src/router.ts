@@ -8,6 +8,8 @@ import TheFullInfoShop from '@/pages/shop-item/TheFullInfoShop.vue';
 import TheFullBlog from '@/pages/full-blog/TheFullBlog.vue';
 import TheLogin from '@/pages/login/TheLogin.vue';
 import TheRegister from '@/pages/register/TheRegister.vue';
+import TheUserInformation from '@/pages/user/user-information/TheUserInformation.vue';
+import TheUserOrders from '@/pages/user/user-orders/TheUserOrders.vue';
 
 export const routes = {
   main: 'main',
@@ -15,6 +17,8 @@ export const routes = {
   blog: 'blog',
   cart: 'cart',
   userPanel: 'user-panel',
+  userInfo: 'user-info',
+  userOrders: 'user-orders',
   shopFullInfo: 'shop-full-info',
   blogFullInfo: 'blog-full-info',
   login: 'login',
@@ -34,7 +38,16 @@ const router = createRouter({
     { path: '/blog', name: routes.blog, component: TheBlog },
     { path: '/blog/:id', name: routes.blogFullInfo, component: TheFullBlog },
     { path: '/cart', name: routes.cart, component: TheCart },
-    { path: '/user-panel', name: routes.userPanel, component: TheUser },
+    {
+      path: '/user-panel',
+      name: routes.userPanel,
+      component: TheUser,
+      redirect: { name: routes.userInfo },
+      children: [
+        { path: 'info', name: routes.userInfo, component: TheUserInformation },
+        { path: 'orders', name: routes.userOrders, component: TheUserOrders },
+      ],
+    },
     { path: '/login', name: routes.login, component: TheLogin },
     { path: '/register', name: routes.register, component: TheRegister },
   ],

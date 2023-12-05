@@ -43,14 +43,10 @@ const linkTo = computed(() => ({
 </template>
 
 <style scoped lang="scss">
-@import '../../styles/mixins';
-
 .post-card {
   background: var(--white-color);
   border-radius: 5px;
   overflow: hidden;
-
-  @include card-hover;
 }
 
 .img {

@@ -26,7 +26,7 @@ const isIcon = computed(
   font-family: Roboto, sans-serif;
   border: none;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border-radius: 5px;
   color: var(--white-color);
   font-size: 18px;
