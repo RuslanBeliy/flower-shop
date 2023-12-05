@@ -2,6 +2,7 @@
 import FlowerCard from '@/components/shop/FlowerCard.vue';
 import { reactive } from 'vue';
 import { IFlower } from '@/types/flowers.ts';
+import BaseTitle from '@/components/ui/BaseTitle.vue';
 const flowers = reactive<IFlower[]>([
   {
     title: 'Daisy',

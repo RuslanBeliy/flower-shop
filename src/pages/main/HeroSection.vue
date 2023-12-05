@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BaseButton from '@/components/ui/BaseButton.vue';
+</script>
 
 <template>
   <section class="hero">

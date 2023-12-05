@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CommentCard from '@/components/comments/CommentCard.vue';
+import BaseTitle from '@/components/ui/BaseTitle.vue';
 </script>
 
 <template>

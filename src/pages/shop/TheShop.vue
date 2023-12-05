@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import FlowerCard from '@/components/shop/FlowerCard.vue';
-import FilterShop from '@/components/shop/FilterShop.vue';
+import ControlShop from '@/components/shop/ControlShop.vue';
+import BaseContainer from '@/components/ui/BaseContainer.vue';
+import BasePagination from '@/components/ui/BasePagination.vue';
 </script>
 
 <template>
   <BaseContainer>
     <section class="shop">
-      <FilterShop />
+      <ControlShop />
       <ul class="list">
         <FlowerCard
           title="Periwinkle"
@@ -44,19 +46,20 @@ import FilterShop from '@/components/shop/FilterShop.vue';
           price="5"
         />
       </ul>
+      <BasePagination :count-pages="9" />
     </section>
   </BaseContainer>
 </template>
 
 <style scoped lang="scss">
 .shop {
-  padding: 40px 0 100px;
+  padding: 40px 0;
 }
 
 .list {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(4, minmax(200px, 1fr));
-  margin-top: 40px;
+  margin: 40px 0;
 }
 </style>

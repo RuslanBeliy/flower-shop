@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeartIcon from '@/components/icons/HeartIcon.vue';
 import EyeIcon from '@/components/icons/EyeIcon.vue';
+import BaseTitle from '@/components/ui/BaseTitle.vue';
 </script>
 
 <template>

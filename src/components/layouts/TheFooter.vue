@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import LocationIcon from '@/components/icons/LocationIcon.vue';
-import MainIcon from '@/components/icons/MainIcon.vue';
+import MailIcon from '@/components/icons/MailIcon.vue';
 import PhoneIcon from '@/components/icons/PhoneIcon.vue';
+import BaseContainer from '@/components/ui/BaseContainer.vue';
+import BaseLogo from '@/components/ui/BaseLogo.vue';
 </script>
 
 <template>
@@ -41,7 +43,7 @@ import PhoneIcon from '@/components/icons/PhoneIcon.vue';
           <li><LocationIcon /> 26985 Brighton Lane, Lake Forest, CA</li>
           <li>
             <a href="mailto:support@Flowers.com">
-              <MainIcon /> support@Flowers.com
+              <MailIcon /> support@Flowers.com
             </a>
           </li>
           <li>

@@ -2,7 +2,8 @@
 import HeroSection from './HeroSection.vue';
 import BestSellers from './BestSellers.vue';
 import LatestPosts from './LatestPosts.vue';
-import CommentsSection from '@/pages/main/CommentsSection.vue';
+import CommentsSection from './CommentsSection.vue';
+import BaseContainer from '@/components/ui/BaseContainer.vue';
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PostCard from '@/components/posts/PostCard.vue';
+import BaseTitle from '@/components/ui/BaseTitle.vue';
 </script>
 
 <template>

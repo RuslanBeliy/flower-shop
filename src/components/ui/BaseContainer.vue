@@ -8,8 +8,8 @@
 
 <style scoped lang="scss">
 .container {
-  max-width: 1220px;
+  max-width: 1230px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 15px;
 }
 </style>

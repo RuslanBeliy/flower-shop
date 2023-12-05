@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BaseAvatar from '@/components/ui/BaseAvatar.vue';
+import BaseRating from '@/components/ui/BaseRating.vue';
+</script>
 
 <template>
   <li class="comment-card">

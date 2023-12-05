@@ -2,6 +2,8 @@
 import UserIcon from '@/components/icons/UserIcon.vue';
 import CartIcon from '@/components/icons/CartIcon.vue';
 import { routes } from '@/router.ts';
+import BaseContainer from '@/components/ui/BaseContainer.vue';
+import BaseLogo from '@/components/ui/BaseLogo.vue';
 </script>
 
 <template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { IFlower } from '@/types/flowers.ts';
+import BaseButton from '@/components/ui/BaseButton.vue';
+import BaseTitle from '@/components/ui/BaseTitle.vue';
 
 defineProps<IFlower>();
 </script>
