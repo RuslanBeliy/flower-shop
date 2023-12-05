@@ -19,24 +19,6 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
         </p>
       </div>
 
-      <nav class="nav">
-        <h3 class="title">Links</h3>
-        <ul class="nav__list">
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">Shop</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Login</a>
-          </li>
-        </ul>
-      </nav>
-
       <div class="contact">
         <h3 class="title">Contact</h3>
         <ul class="contact__list">
@@ -57,7 +39,7 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
 
 <style scoped lang="scss">
 .footer {
-  padding: 55px 0;
+  padding: 40px 0;
   background: var(--secondary-bg-color);
 }
 
@@ -67,7 +49,6 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
 }
 
 .logo-block {
-  max-width: 380px;
   margin-right: auto;
 
   p {
@@ -86,25 +67,8 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
   margin-bottom: 20px;
 }
 
-.nav {
-  &__list {
-    font-size: 18px;
-    line-height: 30px;
-
-    li {
-      a {
-        transition: color 0.2s ease;
-
-        &:hover,
-        &:active {
-          color: var(--white-color);
-        }
-      }
-    }
-  }
-}
-
 .contact {
+  flex-shrink: 0;
   &__list {
     display: flex;
     flex-direction: column;

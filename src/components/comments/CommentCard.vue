@@ -24,14 +24,10 @@ import BaseRating from '@/components/ui/BaseRating.vue';
 </template>
 
 <style scoped lang="scss">
-@import '../../styles/mixins';
-
 .comment-card {
   padding: 20px 20px 20px 100px;
   max-width: 385px;
   background: var(--white-color);
-
-  @include card-hover;
 }
 
 .user-info {

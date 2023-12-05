@@ -23,6 +23,7 @@ const isIcon = computed(
 
 <style scoped lang="scss">
 .btn {
+  font-family: Roboto, sans-serif;
   border: none;
   cursor: pointer;
   padding: 10px 20px;
@@ -32,7 +33,7 @@ const isIcon = computed(
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  transition: background 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   svg {
     width: 20px;

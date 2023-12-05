@@ -13,34 +13,32 @@ const linkTo = computed(() => ({
 
 <template>
   <li class="post-card">
-    <RouterLink :to="linkTo">
-      <div class="img">
-        <img
-          src="https://w.forfun.com/fetch/24/245ada9ee8c2ec7b56e7f9c7e7060986.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="info">
-        <BaseTitle>Best flowers for inside home</BaseTitle>
-        <p class="info__descr">
-          All the flowers are best for your lovely house just get the one you
-          love the most 😊
-        </p>
-        <div class="info__bottom">
-          <div class="info__active">
-            <div class="info__icon">
-              <HeartIcon />
-              <span>15</span>
-            </div>
-            <div class="info__icon">
-              <EyeIcon />
-              <span>2001</span>
-            </div>
+    <div class="img">
+      <img
+        src="https://w.forfun.com/fetch/24/245ada9ee8c2ec7b56e7f9c7e7060986.jpeg"
+        alt=""
+      />
+    </div>
+    <div class="info">
+      <BaseTitle>Best flowers for inside home</BaseTitle>
+      <p class="info__descr">
+        All the flowers are best for your lovely house just get the one you love
+        the most 😊
+      </p>
+      <div class="info__bottom">
+        <div class="info__active">
+          <div class="info__icon">
+            <HeartIcon />
+            <span>15</span>
           </div>
-          <a class="info__link" href="#">Read more</a>
+          <div class="info__icon">
+            <EyeIcon />
+            <span>2001</span>
+          </div>
         </div>
+        <RouterLink :to="linkTo" class="info__link"> Read more </RouterLink>
       </div>
-    </RouterLink>
+    </div>
   </li>
 </template>
 
@@ -98,8 +96,14 @@ const linkTo = computed(() => ({
   }
 
   &__link {
+    padding: 10px 0;
     font-size: 18px;
     color: var(--black-color);
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 }
 </style>
