@@ -2,22 +2,31 @@
 import { IFlower } from '@/types/flowers.ts';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
+import { routes } from '@/router.ts';
+import { computed } from 'vue';
 
 defineProps<IFlower>();
+
+const linkTo = computed(() => ({
+  name: routes.shopFullInfo,
+  params: { id: 1 },
+}));
 </script>
 
 <template>
   <li class="flower-card">
-    <div class="img">
-      <img :src="img" alt="" />
-    </div>
-    <div class="info">
-      <BaseTitle>{{ title }}</BaseTitle>
-      <div class="info-bottom">
-        <strong class="info-bottom__price">{{ price }}$</strong>
-        <BaseButton mode="add-cart-flat">Add to cart</BaseButton>
+    <RouterLink :to="linkTo">
+      <div class="img">
+        <img :src="img" alt="" />
       </div>
-    </div>
+      <div class="info">
+        <BaseTitle>{{ title }}</BaseTitle>
+        <div class="info-bottom">
+          <strong class="info-bottom__price">{{ price }}$</strong>
+          <BaseButton mode="add-cart-flat">Add to cart</BaseButton>
+        </div>
+      </div>
+    </RouterLink>
   </li>
 </template>
 

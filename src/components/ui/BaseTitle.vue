@@ -67,5 +67,6 @@ const classes = computed(() => {
 
 .size-l {
   font-size: 32px;
+  font-weight: 500;
 }
 </style>

@@ -49,6 +49,22 @@ const isIcon = computed(
   }
 }
 
+.add-cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary-color);
+  color: var(--white-color);
+
+  &:hover {
+    background: var(--hover-primary-color);
+  }
+
+  svg {
+    fill: var(--white-color);
+  }
+}
+
 .add-cart-flat {
   display: flex;
   align-items: center;

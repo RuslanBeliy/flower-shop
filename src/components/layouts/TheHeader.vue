@@ -22,9 +22,6 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
           <li>
             <RouterLink :to="{ name: routes.blog }">Blog</RouterLink>
           </li>
-          <li>
-            <RouterLink :to="{ name: routes.about }">About</RouterLink>
-          </li>
         </ul>
       </nav>
 

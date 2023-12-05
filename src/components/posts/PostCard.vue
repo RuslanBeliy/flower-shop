@@ -39,7 +39,6 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
 @import '../../styles/mixins';
 
 .post-card {
-  max-width: 380px;
   background: var(--white-color);
   border-radius: 5px;
   overflow: hidden;
