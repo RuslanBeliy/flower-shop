@@ -2,36 +2,45 @@
 import HeartIcon from '@/components/icons/HeartIcon.vue';
 import EyeIcon from '@/components/icons/EyeIcon.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
+import { computed } from 'vue';
+import { routes } from '@/router.ts';
+
+const linkTo = computed(() => ({
+  name: routes.blogFullInfo,
+  params: { id: 1 },
+}));
 </script>
 
 <template>
   <li class="post-card">
-    <div class="img">
-      <img
-        src="https://w.forfun.com/fetch/24/245ada9ee8c2ec7b56e7f9c7e7060986.jpeg"
-        alt=""
-      />
-    </div>
-    <div class="info">
-      <BaseTitle>Best flowers for inside home</BaseTitle>
-      <p class="info__descr">
-        All the flowers are best for your lovely house just get the one you love
-        the most 😊
-      </p>
-      <div class="info__bottom">
-        <div class="info__active">
-          <div class="info__icon">
-            <HeartIcon />
-            <span>15</span>
-          </div>
-          <div class="info__icon">
-            <EyeIcon />
-            <span>2001</span>
-          </div>
-        </div>
-        <a class="info__link" href="#">Read more</a>
+    <RouterLink :to="linkTo">
+      <div class="img">
+        <img
+          src="https://w.forfun.com/fetch/24/245ada9ee8c2ec7b56e7f9c7e7060986.jpeg"
+          alt=""
+        />
       </div>
-    </div>
+      <div class="info">
+        <BaseTitle>Best flowers for inside home</BaseTitle>
+        <p class="info__descr">
+          All the flowers are best for your lovely house just get the one you
+          love the most 😊
+        </p>
+        <div class="info__bottom">
+          <div class="info__active">
+            <div class="info__icon">
+              <HeartIcon />
+              <span>15</span>
+            </div>
+            <div class="info__icon">
+              <EyeIcon />
+              <span>2001</span>
+            </div>
+          </div>
+          <a class="info__link" href="#">Read more</a>
+        </div>
+      </div>
+    </RouterLink>
   </li>
 </template>
 
@@ -82,6 +91,10 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
     align-items: center;
     gap: 3px;
     font-size: 12px;
+
+    svg {
+      fill: var(--secondary-color);
+    }
   }
 
   &__link {

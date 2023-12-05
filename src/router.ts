@@ -5,6 +5,7 @@ import TheBlog from '@/pages/blog/TheBlog.vue';
 import TheCart from '@/pages/cart/TheCart.vue';
 import TheUser from '@/pages/user/TheUser.vue';
 import TheFullInfoShop from '@/pages/shop-item/TheFullInfoShop.vue';
+import TheFullBlog from '@/pages/full-blog/TheFullBlog.vue';
 
 export const routes = {
   main: 'main',
@@ -13,6 +14,7 @@ export const routes = {
   cart: 'cart',
   userPanel: 'user-panel',
   shopFullInfo: 'shop-full-info',
+  blogFullInfo: 'blog-full-info',
 };
 
 const router = createRouter({
@@ -26,6 +28,7 @@ const router = createRouter({
       component: TheFullInfoShop,
     },
     { path: '/blog', name: routes.blog, component: TheBlog },
+    { path: '/blog/:id', name: routes.blogFullInfo, component: TheFullBlog },
     { path: '/cart', name: routes.cart, component: TheCart },
     { path: '/user-panel', name: routes.userPanel, component: TheUser },
   ],
