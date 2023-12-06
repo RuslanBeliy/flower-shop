@@ -16,7 +16,7 @@ const toggleFilter = () => {
     <div class="filter">
       <BaseButton @click="toggleFilter" mode="flat" class="filter__btn">
         <FilterIcon />
-        <span>Filtering</span>
+        <span>Фильтрация</span>
       </BaseButton>
       <Transition>
         <div v-if="showFilter" class="filter__backdrop">
@@ -34,7 +34,7 @@ const toggleFilter = () => {
 
     <BaseButton mode="flat" class="sort">
       <SortIcon />
-      <span>Cheep</span>
+      <span>Дешево</span>
     </BaseButton>
   </div>
 </template>

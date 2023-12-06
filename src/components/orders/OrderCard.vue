@@ -20,42 +20,6 @@
           alt=""
         />
       </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
     </div>
   </li>
 </template>

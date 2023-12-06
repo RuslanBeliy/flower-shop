@@ -15,7 +15,7 @@ const isIcon = computed(
 </script>
 
 <template>
-  <button :class="`btn ${mode}`">
+  <button :class="`btn ${mode}`" v-bind="$attrs">
     <CartIcon v-if="isIcon" />
     <slot />
   </button>
@@ -35,6 +35,11 @@ const isIcon = computed(
   line-height: normal;
   transition: all 0.2s ease-in-out;
 
+  &[disabled] {
+    cursor: auto;
+    color: var(--third-color);
+  }
+
   svg {
     width: 20px;
     height: 20px;
@@ -47,6 +52,11 @@ const isIcon = computed(
 
   &:hover {
     background: var(--hover-primary-color);
+  }
+
+  &[disabled] {
+    cursor: auto;
+    opacity: 0.4;
   }
 }
 

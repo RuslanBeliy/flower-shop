@@ -1,5 +1,14 @@
+export interface ResponseFlowers {
+  countItems: number;
+  flowers: IFlower[];
+}
 export interface IFlower {
-  title: string;
-  price: string;
-  img: string;
+  _id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+  category: string;
+  description: string;
+  rating: string;
+  comments: [];
 }

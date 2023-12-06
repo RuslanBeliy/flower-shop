@@ -51,6 +51,11 @@ const router = createRouter({
     { path: '/login', name: routes.login, component: TheLogin },
     { path: '/register', name: routes.register, component: TheRegister },
   ],
+  scrollBehavior(_, __, savedPosition) {
+    if (savedPosition) return savedPosition;
+
+    return { left: 0, top: 0 };
+  },
 });
 
 export { router };

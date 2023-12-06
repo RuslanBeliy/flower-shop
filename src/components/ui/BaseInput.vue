@@ -25,6 +25,10 @@ defineOptions({
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    &[disabled] {
+      opacity: 0.4;
+    }
   }
 }
 </style>

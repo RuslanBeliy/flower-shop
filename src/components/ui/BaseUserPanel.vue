@@ -27,6 +27,6 @@
 }
 
 .content {
-  padding: 20px;
+  padding: 20px 40px;
 }
 </style>

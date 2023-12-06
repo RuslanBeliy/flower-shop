@@ -5,7 +5,13 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
 import { routes } from '@/router.ts';
 import { computed } from 'vue';
 
-defineProps<IFlower>();
+interface Props extends Pick<IFlower, 'imageUrl' | 'name' | 'price'> {
+  tag?: 'li' | 'div';
+}
+
+withDefaults(defineProps<Props>(), {
+  tag: 'li',
+});
 
 const linkTo = computed(() => ({
   name: routes.shopFullInfo,
@@ -14,20 +20,20 @@ const linkTo = computed(() => ({
 </script>
 
 <template>
-  <li class="flower-card">
-    <RouterLink :to="linkTo">
+  <component :is="tag" class="flower-card">
+    <RouterLink :to="linkTo" class="link-to">
       <div class="img">
-        <img :src="img" alt="" />
+        <img :src="imageUrl" alt="" />
       </div>
       <div class="info">
-        <BaseTitle>{{ title }}</BaseTitle>
+        <BaseTitle>{{ name }}</BaseTitle>
         <div class="info-bottom">
           <strong class="info-bottom__price">{{ price }}$</strong>
           <BaseButton mode="add-cart-flat">Add to cart</BaseButton>
         </div>
       </div>
     </RouterLink>
-  </li>
+  </component>
 </template>
 
 <style scoped lang="scss">
@@ -35,11 +41,18 @@ const linkTo = computed(() => ({
 
 .flower-card {
   max-width: 290px;
+  height: 100%;
   background: var(--white-color);
   border-radius: 5px;
   overflow: hidden;
 
   @include card-hover;
+}
+
+.link-to {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .img {
@@ -55,9 +68,10 @@ const linkTo = computed(() => ({
 
 .info {
   padding: 15px;
-  min-height: 110px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .info-bottom {

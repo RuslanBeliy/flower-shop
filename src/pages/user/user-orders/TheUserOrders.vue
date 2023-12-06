@@ -14,12 +14,6 @@ import OrderCard from '@/components/orders/OrderCard.vue';
       <li>
         <OrderCard />
       </li>
-      <li>
-        <OrderCard />
-      </li>
-      <li>
-        <OrderCard />
-      </li>
     </ul>
   </BaseUserPanel>
 </template>

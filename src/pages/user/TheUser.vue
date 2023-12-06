@@ -6,6 +6,7 @@ import BaseButton from '@/components/ui/BaseButton.vue';
 import UserIcon from '@/components/icons/UserIcon.vue';
 import BagIcon from '@/components/icons/BagIcon.vue';
 import { routes } from '@/router.ts';
+import QuestionIcon from '@/components/icons/QuestionIcon.vue';
 </script>
 
 <template>
@@ -39,7 +40,9 @@ import { routes } from '@/router.ts';
               </li>
             </ul>
           </nav>
-          <p class="sidebar__contact">Связаться с нами</p>
+          <a href="#" @click.prevent class="sidebar__contact"
+            ><QuestionIcon /> Связаться с нами</a
+          >
         </aside>
 
         <div class="main-info">
@@ -62,11 +65,18 @@ import { routes } from '@/router.ts';
 }
 
 .sidebar {
+  position: relative;
   padding: 30px;
   width: 330px;
   flex-shrink: 0;
 
   &__contact {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
     font-size: 22px;
   }
 }
