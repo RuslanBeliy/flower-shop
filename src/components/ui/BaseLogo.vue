@@ -3,13 +3,15 @@ interface Props {
   white?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   white: false,
 });
 </script>
 
 <template>
-  <h2 class="logo">Flower <span :class="{ white }">Shop</span></h2>
+  <RouterLink to="/">
+    <h2 class="logo">Flower <span :class="{ white }">Shop</span></h2>
+  </RouterLink>
 </template>
 
 <style scoped lang="scss">

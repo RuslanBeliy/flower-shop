@@ -2,18 +2,34 @@
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import PostCard from '@/components/posts/PostCard.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
+import BaseRequestError from '@/components/ui/BaseRequestError.vue';
+import BaseSpinner from '@/components/ui/BaseSpinner.vue';
+import { useBlog } from '@/pages/blog/hooks/useBlog.ts';
+const { posts, error, status, request } = useBlog();
 </script>
 
 <template>
   <BaseContainer>
     <section class="blog">
       <BaseTitle tag="h1" size="l" center line>Наш блог</BaseTitle>
-      <ul class="list">
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+
+      <BaseSpinner v-if="status === 'loading'" center top="30" />
+      <BaseRequestError
+        v-else-if="status === 'error'"
+        :error="error"
+        button-text="Запросить еще раз"
+        @try-again="request"
+      />
+      <ul v-else class="list">
+        <PostCard
+          v-for="post in posts"
+          :key="post._id"
+          :_id="post._id"
+          :title="post.title"
+          :text="post.text"
+          :image-url="post.imageUrl"
+          :views-count="post.viewsCount"
+        />
       </ul>
     </section>
   </BaseContainer>

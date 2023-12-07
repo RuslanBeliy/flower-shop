@@ -5,3 +5,7 @@ export const fetchLatestPosts = async (): Promise<IPost[]> => {
   const { data } = await $api.get<IPost[]>('/posts');
   return data.splice(0, 3);
 };
+export const fetchPosts = async (): Promise<IPost[]> => {
+  const { data } = await $api.get<IPost[]>('/posts');
+  return data;
+};
