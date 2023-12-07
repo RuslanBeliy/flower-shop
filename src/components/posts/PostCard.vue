@@ -4,39 +4,36 @@ import EyeIcon from '@/components/icons/EyeIcon.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import { computed } from 'vue';
 import { routes } from '@/router.ts';
+import { IPost } from '@/types/posts.ts';
+import { textCropping } from '@/utils/textСropping.ts';
+
+interface Props extends IPost {}
+const props = defineProps<Props>();
 
 const linkTo = computed(() => ({
   name: routes.blogFullInfo,
-  params: { id: 1 },
+  params: { id: props._id },
 }));
+
+const cropedText = computed(() => textCropping(props.text, 50) + '...');
 </script>
 
 <template>
   <li class="post-card">
     <div class="img">
-      <img
-        src="https://w.forfun.com/fetch/24/245ada9ee8c2ec7b56e7f9c7e7060986.jpeg"
-        alt=""
-      />
+      <img :src="imageUrl" alt="" />
     </div>
     <div class="info">
-      <BaseTitle>Best flowers for inside home</BaseTitle>
+      <BaseTitle>{{ title }}</BaseTitle>
       <p class="info__descr">
-        All the flowers are best for your lovely house just get the one you love
-        the most 😊
+        {{ cropedText }}
       </p>
       <div class="info__bottom">
-        <div class="info__active">
-          <div class="info__icon">
-            <HeartIcon />
-            <span>15</span>
-          </div>
-          <div class="info__icon">
-            <EyeIcon />
-            <span>2001</span>
-          </div>
+        <div class="info__icon">
+          <EyeIcon />
+          <span>{{ viewsCount }}</span>
         </div>
-        <RouterLink :to="linkTo" class="info__link"> Read more </RouterLink>
+        <RouterLink :to="linkTo" class="info__link">Перейти к посту</RouterLink>
       </div>
     </div>
   </li>
@@ -71,12 +68,6 @@ const linkTo = computed(() => ({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-  }
-
-  &__active {
-    display: flex;
-    align-items: center;
     gap: 20px;
   }
 

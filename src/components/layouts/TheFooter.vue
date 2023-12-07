@@ -12,24 +12,26 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
       <div class="logo-block">
         <BaseLogo white />
         <p>
-          Some random stuff about flower shop and some more info cuz this box
-          had to get fill Some random stuff about flower shop and some more info
-          cuz this box had to get fill Some random stuff about flower shop and
-          some more info cuz this box had to get fill
+          Хотите заказать доставку цветов в Москве? Тогда Flower Shop – именно
+          то, что вы ищете. Мы предлагаем большой выбор букетов и композиций из
+          свежих цветов. Все композиции на сайте авторские и отвечают тенденциям
+          современной флористики. Здесь вы найдёте букеты различной формы и
+          упаковки: от классической крафт-бумаги до техники корейской упаковки
+          цветной плёнкой.
         </p>
       </div>
 
       <div class="contact">
-        <h3 class="title">Contact</h3>
+        <h3 class="title">Контакты</h3>
         <ul class="contact__list">
-          <li><LocationIcon /> 26985 Brighton Lane, Lake Forest, CA</li>
+          <li><LocationIcon /> г. Москва, ул. Печорская, д.16</li>
           <li>
             <a href="mailto:support@Flowers.com">
               <MailIcon /> support@Flowers.com
             </a>
           </li>
           <li>
-            <a href="tel:+1 236 5489"><PhoneIcon /> +1 236 5489</a>
+            <a href="tel:+1 236 5489"><PhoneIcon /> +7(495) 128-11-90</a>
           </li>
         </ul>
       </div>

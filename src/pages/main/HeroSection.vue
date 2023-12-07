@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue';
+import { routes } from '@/router.ts';
 </script>
 
 <template>
   <section class="hero">
     <div class="hero__left">
-      <h1 class="hero__title">Flowers, 🌻 what the world needs</h1>
-      <p class="hero__descr">Browse between hounders of flowers</p>
-      <BaseButton>Browse</BaseButton>
+      <h1 class="hero__title">Цветы 🌻 это то, что нужно миру</h1>
+      <p class="hero__descr">
+        Наша миссия – сделать покупку цветов простой и приятной, для того, что
+        бы дарить улыбки и радость получателю и заказчику
+      </p>
+      <BaseButton :to="{ name: routes.shop }">Заказать</BaseButton>
     </div>
     <div class="hero__right">
       <div class="img">
@@ -54,7 +58,7 @@ import BaseButton from '@/components/ui/BaseButton.vue';
 
   &__descr {
     font-size: 20px;
-    line-height: normal;
+    line-height: 30px;
     margin-bottom: 45px;
   }
 

@@ -5,18 +5,24 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
 import { routes } from '@/router.ts';
 import { computed } from 'vue';
 
-interface Props extends Pick<IFlower, 'imageUrl' | 'name' | 'price'> {
+interface Props extends Pick<IFlower, 'imageUrl' | 'name' | 'price' | '_id'> {
   tag?: 'li' | 'div';
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   tag: 'li',
 });
 
 const linkTo = computed(() => ({
   name: routes.shopFullInfo,
-  params: { id: 1 },
+  params: { id: props._id },
 }));
+
+const intlPrice = new Intl.NumberFormat('ru-RU', {
+  style: 'currency',
+  currency: 'RUB',
+  maximumFractionDigits: 0,
+}).format(props.price);
 </script>
 
 <template>
@@ -28,7 +34,7 @@ const linkTo = computed(() => ({
       <div class="info">
         <BaseTitle>{{ name }}</BaseTitle>
         <div class="info-bottom">
-          <strong class="info-bottom__price">{{ price }}$</strong>
+          <strong class="info-bottom__price">{{ intlPrice }}</strong>
           <BaseButton mode="add-cart-flat">Add to cart</BaseButton>
         </div>
       </div>

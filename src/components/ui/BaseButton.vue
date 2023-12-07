@@ -4,6 +4,7 @@ import { computed } from 'vue';
 
 interface Props {
   mode?: 'flat' | 'main' | 'add-cart' | 'add-cart-flat';
+  to?: { name: string } | string;
 }
 const props = withDefaults(defineProps<Props>(), {
   mode: 'main',
@@ -15,7 +16,12 @@ const isIcon = computed(
 </script>
 
 <template>
-  <button :class="`btn ${mode}`" v-bind="$attrs">
+  <RouterLink v-if="to" :to="to" :class="`btn ${mode}`">
+    <CartIcon v-if="isIcon" />
+    <slot />
+  </RouterLink>
+
+  <button v-else :class="`btn ${mode}`" v-bind="$attrs">
     <CartIcon v-if="isIcon" />
     <slot />
   </button>

@@ -1,32 +1,36 @@
 <script setup lang="ts">
 import BaseAvatar from '@/components/ui/BaseAvatar.vue';
 import BaseRating from '@/components/ui/BaseRating.vue';
+interface Props {
+  name: string;
+  comment: string;
+  imageUrl: string;
+  rating: number;
+}
+
+defineProps<Props>();
 </script>
 
 <template>
   <li class="comment-card">
     <div class="user-info">
-      <BaseAvatar
-        width="58"
-        height="58"
-        src="https://i.pinimg.com/originals/01/c7/b1/01c7b181419e15cc614b2297a0e0b959.jpg"
-      />
-      <strong>Atena</strong>
+      <BaseAvatar width="58" height="58" :src="imageUrl" />
+      <strong>{{ name }}</strong>
     </div>
 
-    <p class="comment">
-      i’m buying flower from them every weak, always fresh flowers and
-      beutiful😍🌻... love’em so nuch..keep going 💯💯
-    </p>
+    <p class="comment">{{ comment }}</p>
 
-    <BaseRating rating="4" />
+    <BaseRating :rating="rating" class="comment-rating" />
   </li>
 </template>
 
 <style scoped lang="scss">
 .comment-card {
+  display: flex;
+  flex-direction: column;
   padding: 20px 20px 20px 100px;
   max-width: 385px;
+  height: 100%;
   background: var(--white-color);
 }
 
@@ -49,5 +53,9 @@ import BaseRating from '@/components/ui/BaseRating.vue';
   font-size: 20px;
   line-height: 30px;
   margin-bottom: 20px;
+}
+
+.comment-rating {
+  margin-top: auto;
 }
 </style>

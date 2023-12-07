@@ -5,8 +5,8 @@ export const useFetch = <T>(
   fn: (params?: unknown) => Promise<T>,
   errorMessage: string = 'Произошла ошибка',
 ) => {
-  const status = ref<TStatus>('init');
   const data = ref<T>();
+  const status = ref<TStatus>('init');
   const error = ref<string | null>(null);
 
   const request = async (...params: unknown[]) => {
