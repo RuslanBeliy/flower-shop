@@ -3,50 +3,56 @@ import FlowerCard from '@/components/shop/FlowerCard.vue';
 import ControlShop from '@/components/shop/ControlShop.vue';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BasePagination from '@/components/ui/BasePagination.vue';
+import { useShop } from '@/pages/shop/hooks/useShop.ts';
+import BaseRequestError from '@/components/ui/BaseRequestError.vue';
+import BaseSpinner from '@/components/ui/BaseSpinner.vue';
+const {
+  flowers,
+  status,
+  error,
+  request,
+  countPage,
+  handleRequest,
+  requestParams,
+} = useShop();
 </script>
 
 <template>
   <BaseContainer>
     <section class="shop">
-      <ControlShop />
-      <ul class="list">
+      <ControlShop
+        :category="requestParams.category"
+        :search="requestParams.search"
+        :sort-by="requestParams.sortBy"
+        @get-search="handleRequest({ search: $event })"
+        @set-sort="handleRequest({ sortBy: $event })"
+        @set-category="handleRequest({ category: $event, page: 1 })"
+      />
+
+      <BaseSpinner v-if="status === 'loading'" center top="30" />
+      <BaseRequestError
+        v-else-if="status === 'error'"
+        :error="error"
+        button-text="Запросить еще раз"
+        @try-again="request"
+      />
+      <ul v-else class="list">
         <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
-        />
-        <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
-        />
-        <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
-        />
-        <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
-        />
-        <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
-        />
-        <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
-        />
-        <FlowerCard
-          title="Periwinkle"
-          img="https://w.forfun.com/fetch/6f/6f7726d490079d34644f286090b81217.jpeg"
-          price="5"
+          v-for="flower in flowers"
+          :key="flower._id"
+          :_id="flower._id"
+          :name="flower.name"
+          :price="flower.price"
+          :image-url="flower.imageUrl"
         />
       </ul>
-      <BasePagination :count-pages="9" />
+
+      <BasePagination
+        v-if="countPage > 1"
+        :count-pages="countPage"
+        :current-page="requestParams.page"
+        @current-page="handleRequest({ page: $event })"
+      />
     </section>
   </BaseContainer>
 </template>

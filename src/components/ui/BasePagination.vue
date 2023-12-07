@@ -1,18 +1,25 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue';
-import { ref } from 'vue';
-
 interface Props {
   countPages: number;
+  currentPage: number;
 }
-defineProps<Props>();
 
-const currentPage = ref(1);
+const emits = defineEmits(['current-page']);
+const props = withDefaults(defineProps<Props>(), {
+  currentPage: 1,
+});
 
 const handleCurrentPage = (val: number | '1' | '-1') => {
-  if (val === '1') return (currentPage.value += 1);
-  if (val === '-1') return (currentPage.value -= 1);
-  currentPage.value = val;
+  if (val === '1') {
+    emits('current-page', props.currentPage + 1);
+    return;
+  }
+  if (val === '-1') {
+    emits('current-page', props.currentPage - 1);
+    return;
+  }
+  emits('current-page', val);
 };
 </script>
 

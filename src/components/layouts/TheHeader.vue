@@ -14,13 +14,13 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
       <nav class="nav">
         <ul class="nav__list">
           <li>
-            <RouterLink :to="{ name: routes.main }">Home</RouterLink>
+            <RouterLink :to="{ name: routes.main }">Главная</RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ name: routes.shop }">Shop</RouterLink>
+            <RouterLink :to="{ name: routes.shop }">Магазин</RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ name: routes.blog }">Blog</RouterLink>
+            <RouterLink :to="{ name: routes.blog }">Блог</RouterLink>
           </li>
         </ul>
       </nav>

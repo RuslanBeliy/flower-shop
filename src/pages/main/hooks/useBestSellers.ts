@@ -3,12 +3,11 @@ import { fetchBestSellers } from '@/api/requests/flowers.ts';
 import { IFlower } from '@/types/flowers.ts';
 import { useFetch } from '@/hooks/useFetch.ts';
 export const useBestSellers = () => {
-  const { data, request, status, error } = useFetch<IFlower[]>(
-    fetchBestSellers,
+  const { data, request, status, error } = useFetch<IFlower[], undefined>(
     'При загрузке товара, произошла ошибка',
   );
 
-  onMounted(request);
+  onMounted(() => request(fetchBestSellers));
 
   return {
     flowers: data,
