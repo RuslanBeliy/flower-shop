@@ -2,33 +2,60 @@
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import TrashIcon from '@/components/icons/TrashIcon.vue';
+import { ICart } from '@/stores/cart.ts';
+import { formatCurrency } from '@/utils/formatCurrency.ts';
+import { computed } from 'vue';
+
+interface Props
+  extends Pick<ICart, 'name' | 'imageUrl' | 'countItems' | 'price'> {}
+
+const emits = defineEmits(['delete', 'increment', 'decrement', 'count-items']);
+const props = defineProps<Props>();
+
+const formatedTotalPrice = computed(() =>
+  formatCurrency(props.price * props.countItems),
+);
+const formatedPrice = formatCurrency(props.price);
+
+const deleteItem = () => {
+  emits('delete');
+};
+const inc = () => {
+  emits('increment');
+};
+const dec = () => {
+  emits('decrement');
+};
+const count = (e: Event) => {
+  const val = +(e.target as HTMLInputElement).value;
+  emits('count-items', val);
+};
 </script>
 
 <template>
   <li class="cart">
     <div class="cart__img">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flower_jtca001.jpg/1600px-Flower_jtca001.jpg"
-        alt=""
-      />
+      <img :src="imageUrl" :alt="name" />
     </div>
     <div class="cart__info">
       <div class="cart__info-header">
-        <BaseTitle tag="h2">Sun flower</BaseTitle>
-        <BaseButton mode="flat">
+        <BaseTitle tag="h2">{{ name }}</BaseTitle>
+        <BaseButton @click="deleteItem" mode="flat">
           <TrashIcon />
         </BaseButton>
       </div>
       <div class="cart__info-footer">
         <div class="cart__count-items">
-          <span>init pic 10$</span>
+          <span>букет: {{ formatedPrice }}</span>
           <div class="cart__control-items">
-            <BaseButton mode="flat">-</BaseButton>
-            <input type="number" value="1" />
-            <BaseButton mode="flat">+</BaseButton>
+            <BaseButton @click="dec" mode="flat" :disabled="countItems === 1">
+              -
+            </BaseButton>
+            <input type="number" :value="countItems" @input="count" min="1" />
+            <BaseButton @click="inc" mode="flat">+</BaseButton>
           </div>
         </div>
-        <BaseTitle tag="h2">Total 10$</BaseTitle>
+        <BaseTitle tag="h2">Итого: {{ formatedTotalPrice }}</BaseTitle>
       </div>
     </div>
   </li>
@@ -68,7 +95,7 @@ import TrashIcon from '@/components/icons/TrashIcon.vue';
 
   &__info-footer {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     gap: 20px;
   }
@@ -81,7 +108,7 @@ import TrashIcon from '@/components/icons/TrashIcon.vue';
   }
 
   &__control-items {
-    margin-top: 5px;
+    margin-top: 15px;
     width: 70px;
     height: 30px;
     border: 1px solid var(--primary-color);
@@ -117,6 +144,11 @@ import TrashIcon from '@/components/icons/TrashIcon.vue';
 
       &:hover {
         background: var(--primary-color);
+        color: var(--white-color);
+      }
+
+      &[disabled] {
+        background: transparent;
         color: var(--white-color);
       }
     }

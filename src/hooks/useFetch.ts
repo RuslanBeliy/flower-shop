@@ -15,6 +15,7 @@ export const useFetch = <T>(errorMessage: string = 'Произошла ошиб�
       data.value = await fn();
 
       status.value = 'success';
+      return data.value;
     } catch (e) {
       status.value = 'error';
       error.value = errorMessage;

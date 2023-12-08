@@ -4,6 +4,8 @@ import CartIcon from '@/components/icons/CartIcon.vue';
 import { routes } from '@/router.ts';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseLogo from '@/components/ui/BaseLogo.vue';
+import { useCartStore } from '@/stores/cart.ts';
+const store = useCartStore();
 </script>
 
 <template>
@@ -31,6 +33,7 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
         </RouterLink>
         <RouterLink :to="{ name: routes.cart }">
           <CartIcon />
+          <span v-if="!store.isEmptyCart">{{ store.countItemsCart }}</span>
         </RouterLink>
       </div>
     </BaseContainer>
@@ -81,11 +84,31 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
   gap: 20px;
 
   a {
+    position: relative;
+
     &:hover {
       svg {
         fill: var(--hover-primary-color);
       }
     }
+
+    span {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      border-radius: 50%;
+      background: var(--white-color);
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      font-size: 14px;
+    }
+
     svg {
       fill: var(--primary-color);
       transition: fill 0.2s ease-in-out;

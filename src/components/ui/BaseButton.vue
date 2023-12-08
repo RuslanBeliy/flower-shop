@@ -72,9 +72,15 @@ const isIcon = computed(
   gap: 10px;
   background: var(--primary-color);
   color: var(--white-color);
+  transition: all 0.1s ease-in;
 
-  &:hover {
+  &:hover,
+  &:active {
     background: var(--hover-primary-color);
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   svg {
@@ -86,16 +92,22 @@ const isIcon = computed(
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0;
   background: transparent;
   color: var(--primary-color);
+  transition: all 0.1s ease-in;
 
-  &:hover {
+  &:hover,
+  &:active {
     color: var(--hover-primary-color);
+    background: rgba(254, 95, 30, 0.1);
 
     svg {
       fill: var(--hover-primary-color);
     }
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   svg {

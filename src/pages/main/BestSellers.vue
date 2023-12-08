@@ -10,8 +10,10 @@ import 'swiper/scss';
 import 'swiper/scss/pagination';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
+import { useCartStore } from '@/stores/cart.ts';
 
 const { flowers, status, error, request } = useBestSellers();
+const { addItemToCart } = useCartStore();
 </script>
 
 <template>
@@ -41,6 +43,7 @@ const { flowers, status, error, request } = useBestSellers();
           :name="flower.name"
           :price="flower.price"
           :image-url="flower.imageUrl"
+          @add-cart="addItemToCart(flower)"
           tag="div"
         />
       </SwiperSlide>

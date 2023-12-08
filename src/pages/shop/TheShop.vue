@@ -3,19 +3,22 @@ import FlowerCard from '@/components/shop/FlowerCard.vue';
 import ControlShop from '@/components/shop/ControlShop.vue';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BasePagination from '@/components/ui/BasePagination.vue';
-import { useShop } from '@/pages/shop/hooks/useShop.ts';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
+import { useShop } from '@/pages/shop/hooks/useShop.ts';
+import { useCartStore } from '@/stores/cart.ts';
+
 const {
+  requestParams,
+  handleRequest,
   flowers,
+  isShowPagination,
   status,
   error,
-  request,
   countPage,
-  requestParams,
-  isShowPagination,
-  handleRequest,
 } = useShop();
+
+const { addItemToCart } = useCartStore();
 </script>
 
 <template>
@@ -31,12 +34,7 @@ const {
       />
 
       <BaseSpinner v-if="status === 'loading'" center top="30" />
-      <BaseRequestError
-        v-else-if="status === 'error'"
-        :error="error"
-        button-text="Запросить еще раз"
-        @try-again="request"
-      />
+      <BaseRequestError v-else-if="status === 'error'" :error="error" />
       <BaseRequestError
         v-else-if="status === 'success' && !flowers?.length"
         error="По вашему запросу ничего не найдено 😔"
@@ -49,6 +47,7 @@ const {
           :name="flower.name"
           :price="flower.price"
           :image-url="flower.imageUrl"
+          @add-cart="addItemToCart(flower)"
         />
       </ul>
 

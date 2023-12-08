@@ -64,6 +64,7 @@ const handleCurrentPage = (val: number | '1' | '-1') => {
 
     &.active {
       color: var(--primary-color);
+      pointer-events: none;
     }
 
     &.hide {

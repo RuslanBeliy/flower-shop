@@ -7,9 +7,14 @@ import { formatCurrency } from '@/utils/formatCurrency.ts';
 
 interface Props extends Omit<IFlower, 'comments'> {}
 
+const emits = defineEmits(['add-cart']);
 const props = defineProps<Props>();
 
 const formatedPrice = formatCurrency(props.price);
+
+const onClick = () => {
+  emits('add-cart');
+};
 </script>
 
 <template>
@@ -30,7 +35,9 @@ const formatedPrice = formatCurrency(props.price);
 
       <div class="info__footer">
         <BaseTitle>{{ formatedPrice }}/букет</BaseTitle>
-        <BaseButton mode="add-cart">Добавить в корзину</BaseButton>
+        <BaseButton @click="onClick" mode="add-cart"
+          >Добавить в корзину</BaseButton
+        >
       </div>
     </div>
   </div>

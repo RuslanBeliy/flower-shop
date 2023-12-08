@@ -10,16 +10,20 @@ interface Props extends Pick<IFlower, 'imageUrl' | 'name' | 'price' | '_id'> {
   tag?: 'li' | 'div';
 }
 
+const emits = defineEmits(['add-cart']);
 const props = withDefaults(defineProps<Props>(), {
   tag: 'li',
 });
+const intlPrice = formatCurrency(props.price);
 
 const linkTo = computed(() => ({
   name: routes.shopFullInfo,
   params: { id: props._id },
 }));
 
-const intlPrice = formatCurrency(props.price);
+const onClick = () => {
+  emits('add-cart');
+};
 </script>
 
 <template>
@@ -32,7 +36,9 @@ const intlPrice = formatCurrency(props.price);
         <BaseTitle>{{ name }}</BaseTitle>
         <div class="info-bottom">
           <strong class="info-bottom__price">{{ intlPrice }}</strong>
-          <BaseButton mode="add-cart-flat">Add to cart</BaseButton>
+          <BaseButton @click.prevent="onClick" mode="add-cart-flat"
+            >В корзину</BaseButton
+          >
         </div>
       </div>
     </RouterLink>

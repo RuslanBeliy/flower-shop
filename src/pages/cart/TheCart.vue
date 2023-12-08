@@ -4,8 +4,16 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
 import CartItem from '@/components/cart/CartItem.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import CartIcon from '@/components/icons/CartIcon.vue';
+import { useCartStore } from '@/stores/cart.ts';
+import { storeToRefs } from 'pinia';
+import { formatCurrency } from '@/utils/formatCurrency.ts';
+import { computed } from 'vue';
 
-const isEmptyCart = false;
+const store = useCartStore();
+const { cart, countItemsCart, totalPrice, isEmptyCart } = storeToRefs(store);
+const { deleteItemFromCart, handleCountItems } = store;
+
+const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
 </script>
 
 <template>
@@ -13,16 +21,28 @@ const isEmptyCart = false;
     <section class="cart-page">
       <template v-if="!isEmptyCart">
         <div class="cart-page__left">
-          <BaseTitle>Your cart</BaseTitle>
+          <BaseTitle tag="h1" size="l">Корзина</BaseTitle>
           <ul class="cart-page__list">
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            <CartItem
+              v-for="el in cart"
+              :key="el._id"
+              :name="el.name"
+              :image-url="el.imageUrl"
+              :count-items="el.countItems"
+              :price="el.price"
+              @delete="deleteItemFromCart(el._id)"
+              @increment="handleCountItems(el._id, 'inc')"
+              @decrement="handleCountItems(el._id, 'dec')"
+              @count-items="handleCountItems(el._id, $event)"
+            />
           </ul>
         </div>
         <div class="cart-page__total-price">
-          <p>Subtotal for 3 items: <strong>62$</strong></p>
-          <BaseButton>Checkout</BaseButton>
+          <p>
+            Количество: <strong>{{ countItemsCart }}</strong> Итого:
+            <strong>{{ formatedTotalPrice }}</strong>
+          </p>
+          <BaseButton>Купить</BaseButton>
         </div>
       </template>
       <div v-else class="cart-page__empty">

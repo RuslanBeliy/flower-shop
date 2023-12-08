@@ -7,8 +7,10 @@ import BaseButton from '@/components/ui/BaseButton.vue';
 import { useFullInfoShop } from '@/pages/shop-item/hooks/useFullInfoShop.ts';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
+import { useCartStore } from '@/stores/cart.ts';
 
 const { flower, status, error } = useFullInfoShop();
+const { addItemToCart } = useCartStore();
 </script>
 
 <template>
@@ -24,6 +26,7 @@ const { flower, status, error } = useFullInfoShop();
         :image-url="flower.imageUrl"
         :price="flower.price"
         :rating="flower.rating"
+        @add-cart="addItemToCart(flower)"
       />
 
       <div class="reviews">
