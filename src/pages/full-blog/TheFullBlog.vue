@@ -2,56 +2,30 @@
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import EyeIcon from '@/components/icons/EyeIcon.vue';
-import HeartIcon from '@/components/icons/HeartIcon.vue';
-import BaseButton from '@/components/ui/BaseButton.vue';
+import { useFullBlog } from '@/pages/full-blog/hooks/useFullBlog.ts';
+import BaseSpinner from '@/components/ui/BaseSpinner.vue';
+import BaseRequestError from '@/components/ui/BaseRequestError.vue';
+
+const { post, error, status } = useFullBlog();
 </script>
 
 <template>
   <BaseContainer>
     <section class="full-blog">
-      <div class="wrapper">
+      <BaseSpinner v-if="status === 'loading'" center />
+      <BaseRequestError v-else-if="status === 'error'" :error="error" />
+      <div v-else class="wrapper">
         <div class="img">
-          <img
-            src="https://w.forfun.com/fetch/24/245ada9ee8c2ec7b56e7f9c7e7060986.jpeg"
-            alt=""
-          />
+          <img :src="post?.imageUrl" :alt="post?.title" />
         </div>
         <div class="info">
-          <BaseTitle tag="h1" size="l" center>Читай этот заголовок</BaseTitle>
-          <p>
-            Съемочные будни. Затеял я пойти к скале Манская баба, попытаться
-            сотворить несколько шыдевров в вечернем освещении. Засунул в Мавик-3
-            флешку на 256 гигабайт, уложил в рюкзак запас аккумуляторов и бодро
-            захрустел по морозному снегу. Часа через полтора, прямо к режимному
-            освещению, прибыл на место. Переоделся: сменил мокрую от пота рубаху
-            на сухую - долго ведь стоять неподвижно на морозе и ветре с пультом
-            в руках. Но что-то пошло не так: квадрокоптер заявил, что мне надо
-            войти в свой аккаунт. А я из него не выходил, вайфай последние три
-            месяца вообще не включал ни разу. А тут в тайге как теперь без
-            интернета войдешь? Без входа можно летать только на высоту до 20
-            метров и в радиусе 40 метров. Вот и поснимал! Но надо попытаться
-            хотя бы... 20 метров в высоту - это даже из крон сосен и пихт не
-            вылетишь. Полез я по глубокому снегу на бедро к Манской бабе, чтобы
-            ближе к вершинам деревьев быть. Опять вспотел. А кроны деревьев все
-            равно небо закрывают. Отключил сенсоры препятствий и сложным
-            маневром вывел аппарат на открытое место перед самой головой Бабы.
-            Выше взлететь невозможно и дальше отлететь тоже. Вариантов немного,
-            щелкнул несколько раз, и расстроенный пошел по вечерним сумеркам к
-            своему Нарыму. В тепле рассмотрел пару полученных снимков - не все
-            так плохо! Может даже мне и повезло, что не смог отлететь от столба
-            на сотню метров, как я делаю обычно... Знатоки, сможете ли
-            подсказать, каким образом Мавики (и 2-й и 3-й) выходят из аккаунта
-            без связи с интернетом, и можно ли этому противостоять?
-          </p>
+          <BaseTitle tag="h1" size="l" center>{{ post?.title }}</BaseTitle>
+          <p>{{ post?.text }}</p>
           <div class="actions">
             <div class="actions__item">
               <EyeIcon />
-              <span>208</span>
+              <span>{{ post?.viewsCount }}</span>
             </div>
-            <BaseButton mode="flat" class="actions__item">
-              <HeartIcon />
-              <span>15</span>
-            </BaseButton>
           </div>
         </div>
       </div>
@@ -105,13 +79,6 @@ import BaseButton from '@/components/ui/BaseButton.vue';
     display: flex;
     align-items: center;
     gap: 5px;
-  }
-
-  button {
-    color: var(--primary-color);
-    svg {
-      fill: var(--primary-color);
-    }
   }
 }
 </style>

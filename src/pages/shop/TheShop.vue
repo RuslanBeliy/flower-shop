@@ -12,8 +12,9 @@ const {
   error,
   request,
   countPage,
-  handleRequest,
   requestParams,
+  isShowPagination,
+  handleRequest,
 } = useShop();
 </script>
 
@@ -36,6 +37,10 @@ const {
         button-text="Запросить еще раз"
         @try-again="request"
       />
+      <BaseRequestError
+        v-else-if="status === 'success' && !flowers?.length"
+        error="По вашему запросу ничего не найдено 😔"
+      />
       <ul v-else class="list">
         <FlowerCard
           v-for="flower in flowers"
@@ -48,7 +53,7 @@ const {
       </ul>
 
       <BasePagination
-        v-if="countPage > 1"
+        v-if="isShowPagination"
         :count-pages="countPage"
         :current-page="requestParams.page"
         @current-page="handleRequest({ page: $event })"

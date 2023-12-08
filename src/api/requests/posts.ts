@@ -9,3 +9,7 @@ export const fetchPosts = async (): Promise<IPost[]> => {
   const { data } = await $api.get<IPost[]>('/posts');
   return data;
 };
+export const fetchPostById = async (id: string): Promise<IPost> => {
+  const { data } = await $api.get<IPost>(`/posts/${id}`);
+  return data;
+};

@@ -2,36 +2,35 @@
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import StarIcon from '@/components/icons/StarIcon.vue';
+import { IFlower } from '@/types/flowers.ts';
+import { formatCurrency } from '@/utils/formatCurrency.ts';
+
+interface Props extends Omit<IFlower, 'comments'> {}
+
+const props = defineProps<Props>();
+
+const formatedPrice = formatCurrency(props.price);
 </script>
 
 <template>
   <div class="full-flower">
     <div class="full-flower__img">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flower_jtca001.jpg/1600px-Flower_jtca001.jpg"
-        alt=""
-      />
+      <img :src="imageUrl" :alt="name" />
     </div>
     <div class="info">
-      <BaseTitle tag="h2">Sun flower</BaseTitle>
-      <p>
-        Make every day brighter with our abundant bouquet of fresh sunflowers.
-        These radiant, long-lasting blooms bring that
-        just-picked-from-the-meadow feeling to birthdays, get well wishes, or
-        any day you want to make someone you care about smile.
-      </p>
+      <BaseTitle tag="h2">{{ name }}</BaseTitle>
+      <p>{{ description }}</p>
 
       <div class="info__rating">
         <div class="info__rating-count">
           <StarIcon />
-          <strong>4.5/5</strong>
+          <strong>{{ rating }}/5</strong>
         </div>
-        <span>(101 people opinion)</span>
       </div>
 
       <div class="info__footer">
-        <BaseTitle>100$/each</BaseTitle>
-        <BaseButton mode="add-cart">Add to cart</BaseButton>
+        <BaseTitle>{{ formatedPrice }}/букет</BaseTitle>
+        <BaseButton mode="add-cart">Добавить в корзину</BaseButton>
       </div>
     </div>
   </div>
@@ -59,6 +58,8 @@ import StarIcon from '@/components/icons/StarIcon.vue';
   }
 }
 .info {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   p {
     margin: 20px 0 10px;
@@ -67,6 +68,7 @@ import StarIcon from '@/components/icons/StarIcon.vue';
   }
 
   &__footer {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;

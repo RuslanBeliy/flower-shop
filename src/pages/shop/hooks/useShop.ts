@@ -6,10 +6,9 @@ import { getSearchParams, setSearchParams } from '@/utils/searchParams.ts';
 import { handlerFlowersParams } from '@/utils/handlerFlowersParams.ts';
 
 export const useShop = () => {
-  const { data, request, error, status } = useFetch<
-    ResponseFlowers,
-    FlowersRequestParams
-  >('Ошибка при загрузке списка цветов');
+  const { data, request, error, status } = useFetch<ResponseFlowers>(
+    'Ошибка при загрузке списка цветов',
+  );
   const requestParams = reactive<FlowersRequestParams>({
     sortBy: 'price-asc',
     page: 1,
@@ -32,6 +31,9 @@ export const useShop = () => {
     if (!data.value) return 0;
     return Math.ceil(data.value.countItems / 12);
   });
+  const isShowPagination = computed(
+    () => !!flowers.value?.length && countPage.value > 1,
+  );
 
   watch(
     () => requestParams.page,
@@ -46,7 +48,8 @@ export const useShop = () => {
     status,
     request,
     countPage,
-    handleRequest,
     requestParams,
+    isShowPagination,
+    handleRequest,
   };
 };

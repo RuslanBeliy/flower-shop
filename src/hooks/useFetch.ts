@@ -1,12 +1,12 @@
 import { ref } from 'vue';
 import { TStatus } from '@/types';
 
-export const useFetch = <T, P>(errorMessage: string = 'Произошла ошибка') => {
+export const useFetch = <T>(errorMessage: string = 'Произошла ошибка') => {
   const data = ref<T>();
   const status = ref<TStatus>('init');
   const error = ref<string | null>(null);
 
-  const request = async (fn: (params?: P) => Promise<T>) => {
+  const request = async (fn: () => Promise<T>) => {
     try {
       status.value = 'loading';
       data.value = undefined;

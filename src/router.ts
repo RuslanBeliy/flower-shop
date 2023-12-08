@@ -10,6 +10,7 @@ import TheLogin from '@/pages/login/TheLogin.vue';
 import TheRegister from '@/pages/register/TheRegister.vue';
 import TheUserInformation from '@/pages/user/user-information/TheUserInformation.vue';
 import TheUserOrders from '@/pages/user/user-orders/TheUserOrders.vue';
+import NotFound from '@/pages/NotFound.vue';
 
 export const routes = {
   main: 'main',
@@ -50,6 +51,7 @@ const router = createRouter({
     },
     { path: '/login', name: routes.login, component: TheLogin },
     { path: '/register', name: routes.register, component: TheRegister },
+    { path: '/:notFound(.*)', component: NotFound },
   ],
   scrollBehavior(_, __, savedPosition) {
     if (savedPosition) return savedPosition;

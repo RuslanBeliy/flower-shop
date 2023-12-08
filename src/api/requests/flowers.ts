@@ -18,3 +18,7 @@ export const fetchFlowers = async (
   const { data } = await $api.get<ResponseFlowers>('/flowers', { params });
   return data;
 };
+export const fetchFlowerById = async (id: string): Promise<IFlower> => {
+  const { data } = await $api.get<IFlower>(`/flowers/${id}`);
+  return data;
+};

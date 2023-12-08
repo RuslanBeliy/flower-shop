@@ -4,7 +4,7 @@ import { onMounted } from 'vue';
 import { IPost } from '@/types/posts.ts';
 
 export const useLatestPosts = () => {
-  const { data, request, status, error } = useFetch<IPost[], undefined>(
+  const { data, request, status, error } = useFetch<IPost[]>(
     'При получении постов, произошла ошибка',
   );
 

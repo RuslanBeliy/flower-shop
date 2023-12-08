@@ -1,3 +1,5 @@
+import { IUser } from '@/types/user.ts';
+
 export interface ResponseFlowers {
   countItems: number;
   flowers: IFlower[];
@@ -9,6 +11,15 @@ export interface IFlower {
   imageUrl: string;
   category: string;
   description: string;
-  rating: string;
-  comments: [];
+  rating: number;
+  comments: IComment[];
+}
+
+export interface IComment {
+  _id: string;
+  text: string;
+  author: IUser;
+  flowerId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

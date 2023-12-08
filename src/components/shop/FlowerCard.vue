@@ -4,6 +4,7 @@ import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import { routes } from '@/router.ts';
 import { computed } from 'vue';
+import { formatCurrency } from '@/utils/formatCurrency.ts';
 
 interface Props extends Pick<IFlower, 'imageUrl' | 'name' | 'price' | '_id'> {
   tag?: 'li' | 'div';
@@ -18,11 +19,7 @@ const linkTo = computed(() => ({
   params: { id: props._id },
 }));
 
-const intlPrice = new Intl.NumberFormat('ru-RU', {
-  style: 'currency',
-  currency: 'RUB',
-  maximumFractionDigits: 0,
-}).format(props.price);
+const intlPrice = formatCurrency(props.price);
 </script>
 
 <template>

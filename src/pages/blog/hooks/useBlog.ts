@@ -4,7 +4,7 @@ import { onMounted } from 'vue';
 import { IPost } from '@/types/posts.ts';
 
 export const useBlog = () => {
-  const { data, status, request, error } = useFetch<IPost[], undefined>(
+  const { data, status, request, error } = useFetch<IPost[]>(
     'Не удалось загрузить список постов',
   );
 

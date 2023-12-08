@@ -4,21 +4,38 @@ import FullFlowerCard from '@/components/shop/FullFlowerCard.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import ReviewCard from '@/components/reviews/ReviewCard.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
+import { useFullInfoShop } from '@/pages/shop-item/hooks/useFullInfoShop.ts';
+import BaseSpinner from '@/components/ui/BaseSpinner.vue';
+import BaseRequestError from '@/components/ui/BaseRequestError.vue';
+
+const { flower, status, error } = useFullInfoShop();
 </script>
 
 <template>
   <BaseContainer>
-    <section class="full-info">
-      <FullFlowerCard />
+    <BaseSpinner v-if="status === 'loading'" center top="50" />
+    <BaseRequestError v-else-if="status === 'error'" :error="error" />
+    <section v-else-if="status === 'success' && flower" class="full-info">
+      <FullFlowerCard
+        :_id="flower._id"
+        :name="flower.name"
+        :description="flower.description"
+        :category="flower.category"
+        :image-url="flower.imageUrl"
+        :price="flower.price"
+        :rating="flower.rating"
+      />
+
       <div class="reviews">
         <BaseTitle>Отзывы</BaseTitle>
-
         <ul class="list">
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
+          <ReviewCard
+            v-for="comment in flower.comments"
+            :key="comment._id"
+            :name="comment.author.userName"
+            :image-url="comment.author.avatarUrl"
+            :comment="comment.text"
+          />
         </ul>
 
         <div class="add-review">
