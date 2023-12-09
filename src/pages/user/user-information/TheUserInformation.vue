@@ -4,15 +4,17 @@ import BaseUserPanel from '@/components/ui/BaseUserPanel.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseInput from '@/components/ui/BaseInput.vue';
 import BaseAvatar from '@/components/ui/BaseAvatar.vue';
-import { ref } from 'vue';
+import { useAuthStore } from '@/stores/auth.ts';
+import { storeToRefs } from 'pinia';
+import { useUserInformation } from '@/pages/user/user-information/hooks/useUserInformation.ts';
 
-const isChange = ref(false);
-
-const handleIsChange = () => (isChange.value = !isChange.value);
+const store = useAuthStore();
+const { user, statusUpdateUser } = storeToRefs(store);
+const { form, v$, isChange, handleIsChange, onSubmit } = useUserInformation();
 </script>
 
 <template>
-  <BaseUserPanel>
+  <BaseUserPanel v-if="user">
     <template #header>
       <BaseTitle size="l" tag="h2">Ваши данные</BaseTitle>
       <BaseButton @click="handleIsChange">{{
@@ -22,24 +24,40 @@ const handleIsChange = () => (isChange.value = !isChange.value);
 
     <div class="wrapper">
       <div class="left">
-        <BaseAvatar
-          src="https://i.pinimg.com/originals/01/c7/b1/01c7b181419e15cc614b2297a0e0b959.jpg"
-          width="130"
-          height="130"
-        />
+        <BaseAvatar :src="user.avatarUrl" text="S" width="130" height="130" />
         <BaseButton :disabled="!isChange" mode="flat"
           >Загрузить фото</BaseButton
         >
       </div>
-      <form class="form">
-        <BaseInput :disabled="!isChange" type="text" placeholder="Имя" />
-        <BaseInput :disabled="!isChange" type="email" placeholder="E-mail" />
+
+      <form @submit.prevent="onSubmit" class="form">
         <BaseInput
+          type="text"
+          placeholder="Имя"
           :disabled="!isChange"
+          v-model="form.userName"
+          @blur="v$.userName.$touch"
+          :error="v$.userName.$errors"
+        />
+        <BaseInput
+          type="email"
+          placeholder="E-mail"
+          :disabled="!isChange"
+          v-model="form.email"
+          @blur="v$.email.$touch"
+          :error="v$.email.$errors"
+        />
+        <BaseInput
           type="password"
           placeholder="Password"
+          :disabled="!isChange"
+          v-model="form.password"
+          @blur="v$.password.$touch"
+          :error="v$.password.$errors"
         />
-        <BaseButton :disabled="!isChange">Отправить</BaseButton>
+        <BaseButton :disabled="!isChange || statusUpdateUser === 'loading'"
+          >Отправить</BaseButton
+        >
       </form>
     </div>
   </BaseUserPanel>

@@ -7,22 +7,32 @@ import UserIcon from '@/components/icons/UserIcon.vue';
 import BagIcon from '@/components/icons/BagIcon.vue';
 import { routes } from '@/router.ts';
 import QuestionIcon from '@/components/icons/QuestionIcon.vue';
+import { useAuthStore } from '@/stores/auth.ts';
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+
+const store = useAuthStore();
+const { user } = storeToRefs(store);
+const { logoutUser } = store;
+
+const router = useRouter();
+
+const logout = () => {
+  logoutUser();
+  router.replace({ name: routes.login });
+};
 </script>
 
 <template>
   <BaseContainer>
-    <section class="user-panel">
+    <section v-if="user" class="user-panel">
       <div class="wrapper">
         <aside class="sidebar">
           <div class="user-data">
-            <BaseAvatar
-              src="https://i.pinimg.com/originals/01/c7/b1/01c7b181419e15cc614b2297a0e0b959.jpg"
-              width="78"
-              height="78"
-            />
+            <BaseAvatar :src="user.avatarUrl" text="S" width="78" height="78" />
             <div class="user-data__right">
-              <BaseTitle>Валерия Белая</BaseTitle>
-              <BaseButton mode="flat">Выход</BaseButton>
+              <BaseTitle>{{ user.userName }}</BaseTitle>
+              <BaseButton @click="logout" mode="flat">Выход</BaseButton>
             </div>
           </div>
 

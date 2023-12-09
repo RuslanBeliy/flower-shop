@@ -17,6 +17,15 @@ const props = defineProps<Props>();
 const emits = defineEmits(['get-search', 'set-sort', 'set-category']);
 
 const showFilter = ref(false);
+
+const textSortButton = computed(() =>
+  props.sortBy === 'price-asc' ? 'Дешевые' : 'Дорогие',
+);
+
+const currentFilter = computed(() => {
+  return filterFlowers.find((el) => el.category === props.category)?.label;
+});
+
 const toggleFilter = () => {
   showFilter.value = !showFilter.value;
 };
@@ -39,14 +48,6 @@ const setCategory = (category?: string) => {
   emits('set-category', category);
   toggleFilter();
 };
-
-const textSortButton = computed(() =>
-  props.sortBy === 'price-asc' ? 'Дешевые' : 'Дорогие',
-);
-
-const currentFilter = computed(() => {
-  return filterFlowers.find((el) => el.category === props.category)?.label;
-});
 
 watch(showFilter, (newValue) => {
   if (newValue) {

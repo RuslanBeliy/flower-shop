@@ -3,7 +3,7 @@ import BaseAvatar from '@/components/ui/BaseAvatar.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 
 interface Props {
-  imageUrl: string;
+  imageUrl?: string;
   name: string;
   comment: string;
 }
@@ -13,7 +13,7 @@ defineProps<Props>();
 
 <template>
   <li class="review-card">
-    <BaseAvatar :src="imageUrl" width="40" height="40" class="ava" />
+    <BaseAvatar :src="imageUrl" text="S" width="40" height="40" class="ava" />
     <div class="info">
       <BaseTitle>{{ name }}</BaseTitle>
       <p>{{ comment }}</p>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import HomeIcon from '@/components/icons/HomeIcon.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
+import BaseRequestError from './BaseRequestError.vue';
 
 interface Props {
   imgSrc: string;
   title: string;
+  error?: string | null;
 }
 
 defineProps<Props>();
@@ -17,7 +19,7 @@ defineProps<Props>();
         <BaseTitle tag="h2" size="l">{{ title }}</BaseTitle>
         <RouterLink to="/"><HomeIcon /> На главную</RouterLink>
       </div>
-
+      <BaseRequestError v-if="error" :error="error" bottom="20" small />
       <slot />
     </div>
     <div class="img">

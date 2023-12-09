@@ -1,7 +1,8 @@
 import { ref } from 'vue';
 import { TStatus } from '@/types';
+import { AxiosError } from 'axios';
 
-export const useFetch = <T>(errorMessage: string = 'Произошла ошибка') => {
+export const useFetch = <T>(errorMessage?: string) => {
   const data = ref<T>();
   const status = ref<TStatus>('init');
   const error = ref<string | null>(null);
@@ -18,7 +19,13 @@ export const useFetch = <T>(errorMessage: string = 'Произошла ошиб�
       return data.value;
     } catch (e) {
       status.value = 'error';
-      error.value = errorMessage;
+      if (errorMessage) {
+        error.value = errorMessage;
+        return;
+      }
+      if (e instanceof AxiosError) {
+        error.value = e.response?.data.message;
+      }
     }
   };
 

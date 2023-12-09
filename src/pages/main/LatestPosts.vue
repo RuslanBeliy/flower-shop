@@ -11,6 +11,7 @@ const { latestPosts, status, request, error } = useLatestPosts();
 <template>
   <section class="latest-posts">
     <BaseTitle tag="h2" size="l" line center>Последние посты</BaseTitle>
+
     <BaseSpinner v-if="status === 'loading'" center top="30" />
     <BaseRequestError
       v-else-if="status === 'error'"

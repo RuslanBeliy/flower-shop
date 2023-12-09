@@ -11,6 +11,7 @@ import TheRegister from '@/pages/register/TheRegister.vue';
 import TheUserInformation from '@/pages/user/user-information/TheUserInformation.vue';
 import TheUserOrders from '@/pages/user/user-orders/TheUserOrders.vue';
 import NotFound from '@/pages/NotFound.vue';
+import { useAuthStore } from './stores/auth';
 
 export const routes = {
   main: 'main',
@@ -44,13 +45,28 @@ const router = createRouter({
       name: routes.userPanel,
       component: TheUser,
       redirect: { name: routes.userInfo },
+      meta: { requireAuth: true },
       children: [
         { path: 'info', name: routes.userInfo, component: TheUserInformation },
         { path: 'orders', name: routes.userOrders, component: TheUserOrders },
       ],
     },
-    { path: '/login', name: routes.login, component: TheLogin },
-    { path: '/register', name: routes.register, component: TheRegister },
+    {
+      path: '/login',
+      name: routes.login,
+      component: TheLogin,
+      meta: { requireLogout: true },
+      beforeEnter() {
+        const store = useAuthStore();
+        if (store.isAuth) return { name: routes.userPanel };
+      },
+    },
+    {
+      path: '/register',
+      name: routes.register,
+      component: TheRegister,
+      meta: { requireLogout: true },
+    },
     { path: '/:notFound(.*)', component: NotFound },
   ],
   scrollBehavior(_, __, savedPosition) {
@@ -58,6 +74,18 @@ const router = createRouter({
 
     return { left: 0, top: 0 };
   },
+});
+
+router.beforeEach((to) => {
+  const store = useAuthStore();
+
+  if (to.meta.requireAuth && !store.isAuth) {
+    return { name: routes.login };
+  }
+
+  if (to.meta.requireLogout && store.isAuth) {
+    return { name: routes.main };
+  }
 });
 
 export { router };

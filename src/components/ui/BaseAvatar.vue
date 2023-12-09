@@ -1,6 +1,7 @@
 <script setup lang="ts">
 interface Props {
-  src: string;
+  src?: string;
+  text?: string;
   width: string;
   height: string;
 }
@@ -10,7 +11,8 @@ defineProps<Props>();
 
 <template>
   <div class="avatar" :style="{ width: width + 'px', height: height + 'px' }">
-    <img :src="src" alt="user avatar" />
+    <img v-if="src" :src="src" alt="user avatar" />
+    <div class="text">{{ text }}</div>
   </div>
 </template>
 
@@ -23,6 +25,17 @@ defineProps<Props>();
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .text {
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
   }
 }
 </style>
