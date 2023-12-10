@@ -57,6 +57,7 @@ const handleCurrentPage = (val: number | '1' | '-1') => {
   button {
     padding: 10px;
     font-size: 20px;
+    color: var(--secondary-color);
 
     &:hover {
       color: var(--hover-primary-color);

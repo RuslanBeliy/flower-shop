@@ -12,7 +12,8 @@ import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
 import { useCartStore } from '@/stores/cart.ts';
 
-const { flowers, status, error, request } = useBestSellers();
+const { flowers, requestFlowers, errorRequestFlowers, statusRequestFlowers } =
+  useBestSellers();
 const { addItemToCart } = useCartStore();
 </script>
 
@@ -20,12 +21,12 @@ const { addItemToCart } = useCartStore();
   <section class="best-sellers">
     <BaseTitle tag="h2" size="l" line center>Популярные заказы</BaseTitle>
 
-    <BaseSpinner v-if="status === 'loading'" top="30" center />
+    <BaseSpinner v-if="statusRequestFlowers === 'loading'" top="30" center />
     <BaseRequestError
-      v-else-if="status === 'error'"
-      :error="error"
+      v-else-if="statusRequestFlowers === 'error'"
+      :error="errorRequestFlowers"
       button-text="Запросить еще раз"
-      @try-again="request"
+      @try-again="requestFlowers"
     />
     <Swiper
       v-else

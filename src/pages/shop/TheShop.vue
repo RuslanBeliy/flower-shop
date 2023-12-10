@@ -13,8 +13,8 @@ const {
   handleRequest,
   flowers,
   isShowPagination,
-  status,
-  error,
+  errorRequestFlowers,
+  statusRequestFlowers,
   countPage,
 } = useShop();
 
@@ -28,15 +28,18 @@ const { addItemToCart } = useCartStore();
         :category="requestParams.category"
         :search="requestParams.search"
         :sort-by="requestParams.sortBy"
-        @get-search="handleRequest({ search: $event })"
+        @get-search="handleRequest({ search: $event, page: 1 })"
         @set-sort="handleRequest({ sortBy: $event })"
         @set-category="handleRequest({ category: $event, page: 1 })"
       />
 
-      <BaseSpinner v-if="status === 'loading'" center top="30" />
-      <BaseRequestError v-else-if="status === 'error'" :error="error" />
+      <BaseSpinner v-if="statusRequestFlowers === 'loading'" center top="30" />
       <BaseRequestError
-        v-else-if="status === 'success' && !flowers?.length"
+        v-else-if="statusRequestFlowers === 'error'"
+        :error="errorRequestFlowers"
+      />
+      <BaseRequestError
+        v-else-if="statusRequestFlowers === 'success' && !flowers?.length"
         error="По вашему запросу ничего не найдено 😔"
       />
       <ul v-else class="list">

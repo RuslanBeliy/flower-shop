@@ -1,22 +1,26 @@
-import { ref } from 'vue';
+import { Ref, ref, UnwrapRef } from 'vue';
 import { TStatus } from '@/types';
 import { AxiosError } from 'axios';
 
-export const useFetch = <T>(errorMessage?: string) => {
-  const data = ref<T>();
+type ReturnType<T> = [
+  (fn: () => Promise<T>) => Promise<T | undefined>,
+  Ref<UnwrapRef<TStatus>>,
+  Ref<UnwrapRef<string | null>>,
+];
+
+export const useFetch = <T>(errorMessage?: string): ReturnType<T> => {
   const status = ref<TStatus>('init');
   const error = ref<string | null>(null);
 
   const request = async (fn: () => Promise<T>) => {
     try {
       status.value = 'loading';
-      data.value = undefined;
       error.value = null;
 
-      data.value = await fn();
+      const res = await fn();
 
       status.value = 'success';
-      return data.value;
+      return res;
     } catch (e) {
       status.value = 'error';
       if (errorMessage) {
@@ -29,5 +33,5 @@ export const useFetch = <T>(errorMessage?: string) => {
     }
   };
 
-  return { data, request, status, error };
+  return [request, status, error];
 };

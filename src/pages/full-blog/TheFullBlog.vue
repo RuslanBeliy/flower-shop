@@ -6,14 +6,17 @@ import { useFullBlog } from '@/pages/full-blog/hooks/useFullBlog.ts';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
 
-const { post, error, status } = useFullBlog();
+const { post, errorRequestPost, statusRequestPost } = useFullBlog();
 </script>
 
 <template>
   <BaseContainer>
     <section class="full-blog">
-      <BaseSpinner v-if="status === 'loading'" center />
-      <BaseRequestError v-else-if="status === 'error'" :error="error" />
+      <BaseSpinner v-if="statusRequestPost === 'loading'" center />
+      <BaseRequestError
+        v-else-if="statusRequestPost === 'error'"
+        :error="errorRequestPost"
+      />
       <div v-else class="wrapper">
         <div class="img">
           <img :src="post?.imageUrl" :alt="post?.title" />

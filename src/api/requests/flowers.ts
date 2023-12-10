@@ -22,3 +22,13 @@ export const fetchFlowerById = async (id: string): Promise<IFlower> => {
   const { data } = await $api.get<IFlower>(`/flowers/${id}`);
   return data;
 };
+
+export const addComment = async (
+  id: string,
+  comment: string,
+): Promise<IFlower> => {
+  const { data } = await $api.post<IFlower>(`/flowers/comments/${id}`, {
+    text: comment,
+  });
+  return data;
+};

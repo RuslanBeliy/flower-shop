@@ -1,23 +1,29 @@
 import { useAuthStore } from '@/stores/auth.ts';
 import { storeToRefs } from 'pinia';
 import { reactive, ref } from 'vue';
-import { RegisterRequest } from '@/api/requests/auth.ts';
+import { RegisterRequest, uploadAvatar } from '@/api/requests/auth.ts';
 import { email, helpers, minLength, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+import { useFetch } from '@/hooks/useFetch.ts';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const useUserInformation = () => {
-  const store = useAuthStore();
+  const isChange = ref(false);
+  const [avatarRequest] = useFetch<{ url: string }>();
 
+  const store = useAuthStore();
   const { user, statusUpdateUser } = storeToRefs(store);
   const { updateUser } = store;
 
-  const isChange = ref(false);
-
-  const form = reactive<RegisterRequest>({
+  const defaultForm = () => ({
     userName: user.value?.userName ?? '',
     email: user.value?.email ?? '',
+    avatarUrl: user.value?.avatarUrl,
     password: '',
   });
+
+  const form = reactive<RegisterRequest>(defaultForm());
 
   const rules = {
     email: {
@@ -44,7 +50,26 @@ export const useUserInformation = () => {
 
   const v$ = useVuelidate(rules, form);
 
-  const handleIsChange = () => (isChange.value = !isChange.value);
+  const handleIsChange = () => {
+    isChange.value = !isChange.value;
+    Object.assign(form, defaultForm());
+  };
+
+  const handleFile = async (e: Event) => {
+    const input = e.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const res = await avatarRequest(() => uploadAvatar(formData));
+
+    form.avatarUrl = res ? API_URL + res.url : undefined;
+  };
+
   const onSubmit = async () => {
     v$.value.$touch();
     if (v$.value.$error) return;
@@ -52,5 +77,6 @@ export const useUserInformation = () => {
     await updateUser(form);
     if (statusUpdateUser.value === 'success') handleIsChange();
   };
-  return { form, v$, isChange, handleIsChange, onSubmit };
+
+  return { form, v$, isChange, handleIsChange, onSubmit, handleFile };
 };

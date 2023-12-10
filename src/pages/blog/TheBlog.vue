@@ -5,7 +5,8 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import { useBlog } from '@/pages/blog/hooks/useBlog.ts';
-const { posts, error, status, request } = useBlog();
+const { posts, requestPosts, errorRequestPosts, statusRequestPosts } =
+  useBlog();
 </script>
 
 <template>
@@ -13,12 +14,12 @@ const { posts, error, status, request } = useBlog();
     <section class="blog">
       <BaseTitle tag="h1" size="l" center line>Наш блог</BaseTitle>
 
-      <BaseSpinner v-if="status === 'loading'" center top="30" />
+      <BaseSpinner v-if="statusRequestPosts === 'loading'" center top="30" />
       <BaseRequestError
-        v-else-if="status === 'error'"
-        :error="error"
+        v-else-if="statusRequestPosts === 'error'"
+        :error="errorRequestPosts"
         button-text="Запросить еще раз"
-        @try-again="request"
+        @try-again="requestPosts"
       />
       <ul v-else class="list">
         <PostCard

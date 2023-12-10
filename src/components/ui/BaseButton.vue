@@ -44,6 +44,7 @@ const isIcon = computed(
   &[disabled] {
     cursor: auto;
     color: var(--third-color);
+    pointer-events: none;
   }
 
   svg {
@@ -118,6 +119,11 @@ const isIcon = computed(
 .flat {
   padding: 0;
   background: transparent;
-  color: inherit;
+  color: var(--primary-color);
+
+  &:hover,
+  &:active {
+    color: var(--hover-primary-color);
+  }
 }
 </style>

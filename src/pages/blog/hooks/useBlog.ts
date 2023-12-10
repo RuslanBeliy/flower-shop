@@ -1,14 +1,16 @@
 import { useFetch } from '@/hooks/useFetch.ts';
 import { fetchPosts } from '@/api/requests/posts.ts';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { IPost } from '@/types/posts.ts';
 
 export const useBlog = () => {
-  const { data, status, request, error } = useFetch<IPost[]>(
-    'Не удалось загрузить список постов',
-  );
+  const posts = ref<IPost[]>();
+  const [requestPosts, statusRequestPosts, errorRequestPosts] =
+    useFetch<IPost[]>();
 
-  onMounted(() => request(fetchPosts));
+  onMounted(async () => {
+    posts.value = await requestPosts(fetchPosts);
+  });
 
-  return { posts: data, status, request, error };
+  return { posts, statusRequestPosts, requestPosts, errorRequestPosts };
 };

@@ -9,14 +9,18 @@ import { storeToRefs } from 'pinia';
 import { useRegister } from '@/pages/register/hooks/useRegister.ts';
 
 const store = useAuthStore();
-const { error, status } = storeToRefs(store);
+const { errorRequestAuth, statusRequestAuth } = storeToRefs(store);
 const { v$, onSubmit, form } = useRegister();
 </script>
 
 <template>
   <BaseContainer>
     <section class="register">
-      <BaseAuth title="Регистрация" img-src="/auth/2.png" :error="error">
+      <BaseAuth
+        title="Регистрация"
+        img-src="/auth/2.png"
+        :error="errorRequestAuth"
+      >
         <form @submit.prevent="onSubmit" class="form">
           <BaseInput
             v-model="form.userName"
@@ -40,7 +44,9 @@ const { v$, onSubmit, form } = useRegister();
             placeholder="Пароль"
           />
 
-          <BaseButton :disabled="status === 'loading'">Регистрация</BaseButton>
+          <BaseButton :disabled="statusRequestAuth === 'loading'"
+            >Регистрация</BaseButton
+          >
           <p>
             Уже зарегистрирован? Тогда
             <RouterLink :to="{ name: routes.login }">авторизуйся</RouterLink>

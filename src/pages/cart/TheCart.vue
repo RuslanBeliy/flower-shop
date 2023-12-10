@@ -8,10 +8,13 @@ import { useCartStore } from '@/stores/cart.ts';
 import { storeToRefs } from 'pinia';
 import { formatCurrency } from '@/utils/formatCurrency.ts';
 import { computed } from 'vue';
+import { useCart } from '@/pages/cart/hooks/useCart.ts';
 
 const store = useCartStore();
 const { cart, countItemsCart, totalPrice, isEmptyCart } = storeToRefs(store);
 const { deleteItemFromCart, handleCountItems } = store;
+
+const { statusRequestCreateOrder, createOrder } = useCart();
 
 const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
 </script>
@@ -42,7 +45,11 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
             Количество: <strong>{{ countItemsCart }}</strong> Итого:
             <strong>{{ formatedTotalPrice }}</strong>
           </p>
-          <BaseButton>Купить</BaseButton>
+          <BaseButton
+            :disabled="statusRequestCreateOrder === 'loading'"
+            @click="createOrder"
+            >Купить</BaseButton
+          >
         </div>
       </template>
       <div v-else class="cart-page__empty">

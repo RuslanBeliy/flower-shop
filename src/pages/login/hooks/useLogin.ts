@@ -10,7 +10,7 @@ export const useLogin = () => {
   const store = useAuthStore();
   const router = useRouter();
 
-  const { status } = storeToRefs(store);
+  const { statusRequestAuth } = storeToRefs(store);
   const { loginUser } = store;
 
   const form = reactive({
@@ -35,7 +35,8 @@ export const useLogin = () => {
     if (v$.value.$error) return;
 
     await loginUser(form);
-    if (status.value === 'success') router.replace({ name: routes.userInfo });
+    if (statusRequestAuth.value === 'success')
+      router.replace({ name: routes.userInfo });
   };
   return { onSubmit, v$, form };
 };

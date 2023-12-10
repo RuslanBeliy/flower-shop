@@ -7,10 +7,18 @@ import BaseAvatar from '@/components/ui/BaseAvatar.vue';
 import { useAuthStore } from '@/stores/auth.ts';
 import { storeToRefs } from 'pinia';
 import { useUserInformation } from '@/pages/user/user-information/hooks/useUserInformation.ts';
+import { ref } from 'vue';
 
 const store = useAuthStore();
 const { user, statusUpdateUser } = storeToRefs(store);
-const { form, v$, isChange, handleIsChange, onSubmit } = useUserInformation();
+const { form, v$, isChange, handleIsChange, onSubmit, handleFile } =
+  useUserInformation();
+
+const refFile = ref<HTMLInputElement>();
+
+const uploadImg = () => {
+  refFile.value?.click();
+};
 </script>
 
 <template>
@@ -24,10 +32,11 @@ const { form, v$, isChange, handleIsChange, onSubmit } = useUserInformation();
 
     <div class="wrapper">
       <div class="left">
-        <BaseAvatar :src="user.avatarUrl" text="S" width="130" height="130" />
-        <BaseButton :disabled="!isChange" mode="flat"
+        <BaseAvatar :src="form.avatarUrl" text="S" width="130" height="130" />
+        <BaseButton @click="uploadImg" :disabled="!isChange" mode="flat"
           >Загрузить фото</BaseButton
         >
+        <input @change="handleFile" ref="refFile" type="file" hidden />
       </div>
 
       <form @submit.prevent="onSubmit" class="form">
@@ -49,7 +58,7 @@ const { form, v$, isChange, handleIsChange, onSubmit } = useUserInformation();
         />
         <BaseInput
           type="password"
-          placeholder="Password"
+          placeholder="Пароль"
           :disabled="!isChange"
           v-model="form.password"
           @blur="v$.password.$touch"

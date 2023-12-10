@@ -1,14 +1,24 @@
 import { useFetch } from '@/hooks/useFetch.ts';
 import { fetchLatestPosts } from '@/api/requests/posts.ts';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { IPost } from '@/types/posts.ts';
 
 export const useLatestPosts = () => {
-  const { data, request, status, error } = useFetch<IPost[]>(
-    'При получении постов, произошла ошибка',
-  );
+  const latestPosts = ref<IPost[]>();
+  const [
+    requestLatestPosts,
+    statusRequestLatestPosts,
+    errorRequestLatestPosts,
+  ] = useFetch<IPost[]>();
 
-  onMounted(() => request(fetchLatestPosts));
+  onMounted(async () => {
+    latestPosts.value = await requestLatestPosts(fetchLatestPosts);
+  });
 
-  return { latestPosts: data, status, error, request };
+  return {
+    latestPosts,
+    statusRequestLatestPosts,
+    errorRequestLatestPosts,
+    requestLatestPosts,
+  };
 };

@@ -1,24 +1,33 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ResponseOrders } from '@/types/orders.ts';
+import { formatCurrency } from '@/utils/formatCurrency.ts';
+
+interface Props extends Pick<ResponseOrders, 'order' | 'createdAt' | '_id'> {}
+
+const props = defineProps<Props>();
+
+const code = props._id.slice(0, 5);
+const date = new Intl.DateTimeFormat('ru-RU').format(new Date(props.createdAt));
+const price = props.order.reduce((acc, el) => acc + el.price, 0);
+const formatedPrice = formatCurrency(price);
+</script>
 
 <template>
   <li class="order-card">
     <div class="header">
-      <span>order code <strong>96541</strong></span>
-      <span>date <strong>2022/09/01</strong></span>
-      <span>price <strong>2500$</strong></span>
+      <span
+        >заказ № <strong>{{ code }}</strong></span
+      >
+      <span
+        >дата заказа <strong>{{ date }}</strong></span
+      >
+      <span
+        >цена <strong>{{ formatedPrice }}</strong></span
+      >
     </div>
     <div class="orders">
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="orders__img">
-        <img
-          src="https://w.forfun.com/fetch/e4/e4505ab5bb7e47d7a21a105205872dff.jpeg"
-          alt=""
-        />
+      <div v-for="o in order" class="orders__img">
+        <img :src="o.imageUrl" :alt="o.name" />
       </div>
     </div>
   </li>

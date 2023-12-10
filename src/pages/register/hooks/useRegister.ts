@@ -9,7 +9,7 @@ import { storeToRefs } from 'pinia';
 export const useRegister = () => {
   const router = useRouter();
   const store = useAuthStore();
-  const { status } = storeToRefs(store);
+  const { statusRequestAuth } = storeToRefs(store);
   const { registerUser } = store;
 
   const form = reactive({
@@ -50,7 +50,8 @@ export const useRegister = () => {
     if (v$.value.$error) return;
 
     await registerUser(form);
-    if (status.value === 'success') router.replace({ name: routes.userInfo });
+    if (statusRequestAuth.value === 'success')
+      router.replace({ name: routes.userInfo });
   };
 
   return { onSubmit, form, v$ };

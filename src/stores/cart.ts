@@ -2,11 +2,12 @@ import { defineStore } from 'pinia';
 import { IFlower } from '@/types/flowers.ts';
 import { computed, ref, watch } from 'vue';
 
+const KEY_CART = 'cart';
 export interface ICart extends IFlower {
   countItems: number;
 }
 export const useCartStore = defineStore('cart', () => {
-  const LS = localStorage.getItem('cart');
+  const LS = localStorage.getItem(KEY_CART);
   const cartLS = LS ? JSON.parse(LS) : [];
 
   const cart = ref<ICart[]>(cartLS);
@@ -17,6 +18,11 @@ export const useCartStore = defineStore('cart', () => {
     cart.value.reduce((acc, el) => acc + el.price * el.countItems, 0),
   );
   const isEmptyCart = computed(() => !countItemsCart.value);
+
+  const clearCart = () => {
+    cart.value = [];
+    localStorage.removeItem(KEY_CART);
+  };
 
   const addItemToCart = (flower: IFlower) => {
     const foundItem = cart.value.find((el) => el._id === flower._id);
@@ -48,9 +54,13 @@ export const useCartStore = defineStore('cart', () => {
     if (item && typeof val === 'number' && val > 0) item.countItems = val;
   };
 
-  watch(cart, () => localStorage.setItem('cart', JSON.stringify(cart.value)), {
-    deep: true,
-  });
+  watch(
+    cart,
+    () => localStorage.setItem(KEY_CART, JSON.stringify(cart.value)),
+    {
+      deep: true,
+    },
+  );
 
   return {
     cart,
@@ -60,5 +70,6 @@ export const useCartStore = defineStore('cart', () => {
     addItemToCart,
     deleteItemFromCart,
     handleCountItems,
+    clearCart,
   };
 });

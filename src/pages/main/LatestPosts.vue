@@ -5,19 +5,28 @@ import { useLatestPosts } from '@/pages/main/hooks/useLatestPosts.ts';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
 
-const { latestPosts, status, request, error } = useLatestPosts();
+const {
+  latestPosts,
+  requestLatestPosts,
+  statusRequestLatestPosts,
+  errorRequestLatestPosts,
+} = useLatestPosts();
 </script>
 
 <template>
   <section class="latest-posts">
     <BaseTitle tag="h2" size="l" line center>Последние посты</BaseTitle>
 
-    <BaseSpinner v-if="status === 'loading'" center top="30" />
+    <BaseSpinner
+      v-if="statusRequestLatestPosts === 'loading'"
+      center
+      top="30"
+    />
     <BaseRequestError
-      v-else-if="status === 'error'"
-      :error="error"
+      v-else-if="statusRequestLatestPosts === 'error'"
+      :error="errorRequestLatestPosts"
       button-text="Запросить еще раз"
-      @try-again="request"
+      @try-again="requestLatestPosts"
     />
     <ul v-else class="list">
       <PostCard

@@ -10,9 +10,11 @@ import QuestionIcon from '@/components/icons/QuestionIcon.vue';
 import { useAuthStore } from '@/stores/auth.ts';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import BaseSpinner from '@/components/ui/BaseSpinner.vue';
+import { watch } from 'vue';
 
 const store = useAuthStore();
-const { user } = storeToRefs(store);
+const { user, statusRequestMe } = storeToRefs(store);
 const { logoutUser } = store;
 
 const router = useRouter();
@@ -21,10 +23,15 @@ const logout = () => {
   logoutUser();
   router.replace({ name: routes.login });
 };
+
+watch(statusRequestMe, () => {
+  if (statusRequestMe.value === 'error') router.replace({ name: routes.login });
+});
 </script>
 
 <template>
   <BaseContainer>
+    <BaseSpinner v-if="statusRequestMe === 'loading'" top="50" center />
     <section v-if="user" class="user-panel">
       <div class="wrapper">
         <aside class="sidebar">
@@ -100,6 +107,7 @@ const logout = () => {
   button {
     margin-top: 5px;
     font-size: 18px;
+    color: var(--secondary-color);
 
     &:hover {
       color: var(--black-color);

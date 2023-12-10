@@ -9,14 +9,18 @@ import { storeToRefs } from 'pinia';
 import { useLogin } from '@/pages/login/hooks/useLogin.ts';
 
 const store = useAuthStore();
-const { status, error } = storeToRefs(store);
+const { statusRequestAuth, errorRequestAuth } = storeToRefs(store);
 const { v$, form, onSubmit } = useLogin();
 </script>
 
 <template>
   <BaseContainer>
     <section class="login">
-      <BaseAuth img-src="/auth/1.png" title="Авторизация" :error="error">
+      <BaseAuth
+        img-src="/auth/1.png"
+        title="Авторизация"
+        :error="errorRequestAuth"
+      >
         <form @submit.prevent="onSubmit" class="form">
           <BaseInput
             type="email"
@@ -33,7 +37,9 @@ const { v$, form, onSubmit } = useLogin();
             :error="v$.password.$errors"
           />
 
-          <BaseButton :disabled="status === 'loading'">Войти</BaseButton>
+          <BaseButton :disabled="statusRequestAuth === 'loading'"
+            >Войти</BaseButton
+          >
           <p>
             Нет аккаунта? Тогда тебе
             <RouterLink :to="{ name: routes.register }">сюда</RouterLink>
