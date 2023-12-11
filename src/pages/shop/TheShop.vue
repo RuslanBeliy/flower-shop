@@ -42,7 +42,7 @@ const { addItemToCart } = useCartStore();
         v-else-if="statusRequestFlowers === 'success' && !flowers?.length"
         error="По вашему запросу ничего не найдено 😔"
       />
-      <ul v-else class="list">
+      <TransitionGroup v-else tag="ul" name="list" class="list">
         <FlowerCard
           v-for="flower in flowers"
           :key="flower._id"
@@ -52,7 +52,7 @@ const { addItemToCart } = useCartStore();
           :image-url="flower.imageUrl"
           @add-cart="addItemToCart(flower)"
         />
-      </ul>
+      </TransitionGroup>
 
       <BasePagination
         v-if="isShowPagination"
@@ -74,5 +74,39 @@ const { addItemToCart } = useCartStore();
   gap: 20px;
   grid-template-columns: repeat(4, minmax(200px, 1fr));
   margin: 40px 0;
+}
+
+.list-enter-active {
+  animation: list-add 0.5s ease-in-out;
+}
+
+.list-leave-active {
+  position: absolute;
+  animation: list-delete 0s ease-in-out forwards;
+}
+
+.list-move {
+  transition: transform 0.5s ease;
+}
+
+@keyframes list-add {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes list-delete {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
 }
 </style>

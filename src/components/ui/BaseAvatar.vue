@@ -6,13 +6,15 @@ interface Props {
   height: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const letter = props.text?.slice(0, 1).toUpperCase();
 </script>
 
 <template>
   <div class="avatar" :style="{ width: width + 'px', height: height + 'px' }">
     <img v-if="src" :src="src" alt="user avatar" />
-    <div class="text">{{ text }}</div>
+    <div v-else class="text">{{ letter }}</div>
   </div>
 </template>
 
@@ -35,7 +37,7 @@ defineProps<Props>();
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 50px;
+    font-size: 40px;
   }
 }
 </style>

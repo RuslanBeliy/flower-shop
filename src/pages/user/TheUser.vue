@@ -36,7 +36,12 @@ watch(statusRequestMe, () => {
       <div class="wrapper">
         <aside class="sidebar">
           <div class="user-data">
-            <BaseAvatar :src="user.avatarUrl" text="S" width="78" height="78" />
+            <BaseAvatar
+              :src="user.avatarUrl"
+              :text="user.userName"
+              width="78"
+              height="78"
+            />
             <div class="user-data__right">
               <BaseTitle>{{ user.userName }}</BaseTitle>
               <BaseButton @click="logout" mode="flat">Выход</BaseButton>

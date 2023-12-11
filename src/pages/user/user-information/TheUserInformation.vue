@@ -32,7 +32,12 @@ const uploadImg = () => {
 
     <div class="wrapper">
       <div class="left">
-        <BaseAvatar :src="form.avatarUrl" text="S" width="130" height="130" />
+        <BaseAvatar
+          :src="form.avatarUrl"
+          :text="user.userName"
+          width="130"
+          height="130"
+        />
         <BaseButton @click="uploadImg" :disabled="!isChange" mode="flat"
           >Загрузить фото</BaseButton
         >

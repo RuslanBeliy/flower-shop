@@ -25,7 +25,7 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
       <template v-if="!isEmptyCart">
         <div class="cart-page__left">
           <BaseTitle tag="h1" size="l">Корзина</BaseTitle>
-          <ul class="cart-page__list">
+          <TransitionGroup tag="ul" name="list" class="cart-page__list">
             <CartItem
               v-for="el in cart"
               :key="el._id"
@@ -38,7 +38,7 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
               @decrement="handleCountItems(el._id, 'dec')"
               @count-items="handleCountItems(el._id, $event)"
             />
-          </ul>
+          </TransitionGroup>
         </div>
         <div class="cart-page__total-price">
           <p>
@@ -116,6 +116,40 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
       height: 230px;
       fill: var(--third-color);
     }
+  }
+}
+
+.list-enter-active {
+  animation: list-add 0.3s ease-in-out;
+}
+
+.list-leave-active {
+  position: absolute;
+  animation: list-delete 0.5s ease-in-out forwards;
+}
+
+.list-move {
+  transition: transform 0.8s ease;
+}
+
+@keyframes list-add {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes list-delete {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100px);
   }
 }
 </style>

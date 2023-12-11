@@ -13,7 +13,11 @@ initialRequest();
     <TheHeader />
 
     <main class="main">
-      <RouterView />
+      <RouterView v-slot="slotProps">
+        <Transition name="route" mode="out-in">
+          <Component :is="slotProps.Component" />
+        </Transition>
+      </RouterView>
     </main>
 
     <TheFooter />
@@ -29,5 +33,24 @@ initialRequest();
 
 .main {
   flex-grow: 1;
+}
+
+.route-enter-active {
+  animation: page 0.5s ease-in-out;
+}
+
+.route-leave-active {
+  animation: page 0.5s ease-in-out reverse;
+}
+
+@keyframes page {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 </style>

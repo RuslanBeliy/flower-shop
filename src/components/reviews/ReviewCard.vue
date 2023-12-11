@@ -13,7 +13,13 @@ defineProps<Props>();
 
 <template>
   <li class="review-card">
-    <BaseAvatar :src="imageUrl" text="S" width="40" height="40" class="ava" />
+    <BaseAvatar
+      :src="imageUrl"
+      :text="name"
+      width="40"
+      height="40"
+      class="ava"
+    />
     <div class="info">
       <BaseTitle>{{ name }}</BaseTitle>
       <p>{{ comment }}</p>

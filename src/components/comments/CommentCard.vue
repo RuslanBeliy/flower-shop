@@ -14,7 +14,7 @@ defineProps<Props>();
 <template>
   <li class="comment-card">
     <div class="user-info">
-      <BaseAvatar width="58" height="58" :src="imageUrl" />
+      <BaseAvatar width="58" height="58" :src="imageUrl" :text="name" />
       <strong>{{ name }}</strong>
     </div>
 
