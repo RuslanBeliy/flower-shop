@@ -1,3 +1,5 @@
+import { computed, ref } from 'vue';
+import { defineStore } from 'pinia';
 import {
   LoginRequest,
   login,
@@ -8,8 +10,6 @@ import {
 } from '@/api/requests/auth';
 import { useFetch } from '@/hooks/useFetch';
 import { IUser, ResponseAuth } from '@/types/user';
-import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
 
 export const KEY_TOKEN = 'token';
 

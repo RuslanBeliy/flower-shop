@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseAvatar from '@/components/ui/BaseAvatar.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
@@ -8,10 +11,7 @@ import BagIcon from '@/components/icons/BagIcon.vue';
 import { routes } from '@/router.ts';
 import QuestionIcon from '@/components/icons/QuestionIcon.vue';
 import { useAuthStore } from '@/stores/auth.ts';
-import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
-import { watch } from 'vue';
 
 const store = useAuthStore();
 const { user, statusRequestMe } = storeToRefs(store);
@@ -78,12 +78,20 @@ watch(statusRequestMe, () => {
 <style scoped lang="scss">
 .user-panel {
   padding: 80px 0;
+
+  @media (max-width: 576px) {
+    padding: 30px 0;
+  }
 }
 
 .wrapper {
   display: flex;
   background: var(--white-color);
   border-radius: 5px;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
 }
 
 .sidebar {
@@ -91,6 +99,15 @@ watch(statusRequestMe, () => {
   padding: 30px;
   width: 330px;
   flex-shrink: 0;
+
+  @media (max-width: 992px) {
+    display: flex;
+    width: 100%;
+  }
+
+  @media (max-width: 576px) {
+    display: block;
+  }
 
   &__contact {
     position: absolute;
@@ -109,6 +126,14 @@ watch(statusRequestMe, () => {
   gap: 20px;
   margin-bottom: 70px;
 
+  @media (max-width: 992px) {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 20px;
+  }
+
   button {
     margin-top: 5px;
     font-size: 18px;
@@ -123,13 +148,46 @@ watch(statusRequestMe, () => {
 .nav {
   margin-bottom: 100px;
 
+  @media (max-width: 992px) {
+    padding-top: 20px;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 576px) {
+    display: flex;
+    width: 100%;
+    margin-bottom: 80px;
+  }
+
   &__list {
     padding-left: 30px;
     font-size: 22px;
 
+    @media (max-width: 992px) {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+    }
+
+    @media (max-width: 576px) {
+      display: block;
+      padding-left: 0;
+    }
+
     li {
       &:not(:last-child) {
         margin-bottom: 40px;
+        @media (max-width: 992px) {
+          margin-bottom: 0;
+        }
+
+        @media (max-width: 576px) {
+          margin-bottom: 20px;
+        }
       }
     }
 

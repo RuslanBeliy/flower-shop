@@ -20,7 +20,7 @@ const {
   statusRequestComment,
 } = useFullInfoShop();
 const { addItemToCart } = useCartStore();
-const { isAuth } = useAuthStore();
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -60,7 +60,7 @@ const { isAuth } = useAuthStore();
           />
         </ul>
 
-        <div v-if="isAuth" class="add-review">
+        <div v-if="authStore.isAuth" class="add-review">
           <textarea
             v-model="comment"
             placeholder="Оставьте свой отзыв"
@@ -86,6 +86,10 @@ const { isAuth } = useAuthStore();
   display: flex;
   align-items: start;
   gap: 40px;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
 }
 
 .reviews {
@@ -94,6 +98,10 @@ const { isAuth } = useAuthStore();
   width: 300px;
   flex-shrink: 0;
   padding: 30px 20px;
+
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 
   &__empty {
     margin: 10px 0;

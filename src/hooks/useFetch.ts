@@ -1,6 +1,6 @@
 import { Ref, ref, UnwrapRef } from 'vue';
-import { TStatus } from '@/types';
 import { AxiosError } from 'axios';
+import { TStatus } from '@/types';
 
 type ReturnType<T> = [
   (fn: () => Promise<T>) => Promise<T | undefined>,

@@ -50,12 +50,29 @@ const onClick = () => {
   display: flex;
   gap: 60px;
 
+  @media (max-width: 1200px) {
+    gap: 20px;
+    padding: 20px;
+  }
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+
   &__img {
     flex-shrink: 0;
     width: 250px;
     height: 220px;
     border-radius: 5px;
     overflow: hidden;
+
+    @media (max-width: 1200px) {
+      width: 200px;
+      height: 180px;
+    }
+    @media (max-width: 576px) {
+      width: 100%;
+      height: 300px;
+    }
 
     img {
       width: 100%;
@@ -80,6 +97,10 @@ const onClick = () => {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__rating {

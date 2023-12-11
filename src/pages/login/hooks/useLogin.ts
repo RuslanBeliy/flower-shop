@@ -1,9 +1,9 @@
-import { useAuthStore } from '@/stores/auth.ts';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { reactive } from 'vue';
-import { email, helpers, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+import { email, helpers, required } from '@vuelidate/validators';
+import { useAuthStore } from '@/stores/auth.ts';
 import { routes } from '@/router.ts';
 
 export const useLogin = () => {

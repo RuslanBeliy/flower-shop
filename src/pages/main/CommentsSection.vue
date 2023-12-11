@@ -30,5 +30,17 @@ import { comments } from '@/constants';
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, minmax(300px, 1fr));
+  }
+
+  @media (max-width: 576px) {
+    margin-top: 20px;
+  }
 }
 </style>

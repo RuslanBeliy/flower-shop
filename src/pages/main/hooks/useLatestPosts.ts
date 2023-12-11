@@ -1,6 +1,6 @@
+import { onMounted, ref } from 'vue';
 import { useFetch } from '@/hooks/useFetch.ts';
 import { fetchLatestPosts } from '@/api/requests/posts.ts';
-import { onMounted, ref } from 'vue';
 import { IPost } from '@/types/posts.ts';
 
 export const useLatestPosts = () => {

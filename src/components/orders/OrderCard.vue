@@ -36,8 +36,10 @@ const formatedPrice = formatCurrency(price);
 <style scoped lang="scss">
 .header {
   margin-bottom: 25px;
+  display: flex;
+  gap: 30px;
+
   span {
-    margin-right: 30px;
     font-size: 20px;
 
     strong {

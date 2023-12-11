@@ -24,6 +24,11 @@
   gap: 20px;
   padding: 20px 40px;
   border-bottom: 1px solid var(--third-color);
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    //align-items: end;
+  }
 }
 
 .content {

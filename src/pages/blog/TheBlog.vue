@@ -5,6 +5,7 @@ import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseRequestError from '@/components/ui/BaseRequestError.vue';
 import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 import { useBlog } from '@/pages/blog/hooks/useBlog.ts';
+
 const { posts, requestPosts, errorRequestPosts, statusRequestPosts } =
   useBlog();
 </script>
@@ -46,5 +47,12 @@ const { posts, requestPosts, errorRequestPosts, statusRequestPosts } =
   gap: 30px;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
   margin-top: 30px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, minmax(300px, 1fr));
+  }
 }
 </style>

@@ -1,6 +1,6 @@
-import { useFetch } from '@/hooks/useFetch.ts';
-import { useRoute } from 'vue-router';
 import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useFetch } from '@/hooks/useFetch.ts';
 import { fetchPostById } from '@/api/requests/posts.ts';
 import { IPost } from '@/types/posts.ts';
 

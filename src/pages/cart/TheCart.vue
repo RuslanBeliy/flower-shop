@@ -1,18 +1,22 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import CartItem from '@/components/cart/CartItem.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import CartIcon from '@/components/icons/CartIcon.vue';
 import { useCartStore } from '@/stores/cart.ts';
-import { storeToRefs } from 'pinia';
+import { useAuthStore } from '@/stores/auth.ts';
 import { formatCurrency } from '@/utils/formatCurrency.ts';
-import { computed } from 'vue';
 import { useCart } from '@/pages/cart/hooks/useCart.ts';
+import { routes } from '@/router.ts';
 
 const store = useCartStore();
 const { cart, countItemsCart, totalPrice, isEmptyCart } = storeToRefs(store);
 const { deleteItemFromCart, handleCountItems } = store;
+
+const authStore = useAuthStore();
 
 const { statusRequestCreateOrder, createOrder } = useCart();
 
@@ -46,9 +50,13 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
             <strong>{{ formatedTotalPrice }}</strong>
           </p>
           <BaseButton
+            v-if="authStore.isAuth"
             :disabled="statusRequestCreateOrder === 'loading'"
             @click="createOrder"
             >Купить</BaseButton
+          >
+          <BaseButton v-else :to="{ name: routes.login }" mode="flat"
+            >авторизуйтесь</BaseButton
           >
         </div>
       </template>
@@ -65,11 +73,19 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
   display: flex;
   gap: 40px;
 
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
+
   &__left {
     background: var(--white-color);
     padding: 40px;
     border-radius: 5px;
     flex-grow: 1;
+
+    @media (max-width: 576px) {
+      padding: 20px;
+    }
   }
 
   &__list {
@@ -78,6 +94,10 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
     li {
       &:not(:last-child) {
         margin-bottom: 30px;
+
+        @media (max-width: 768px) {
+          margin-bottom: 50px;
+        }
       }
     }
   }
@@ -88,6 +108,14 @@ const formatedTotalPrice = computed(() => formatCurrency(totalPrice.value));
     background: var(--white-color);
     align-self: start;
     border-radius: 5px;
+
+    @media (max-width: 992px) {
+      margin: 0 auto;
+    }
+
+    @media (max-width: 576px) {
+      width: 100%;
+    }
 
     p {
       color: var(--black-color);

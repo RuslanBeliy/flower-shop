@@ -1,10 +1,10 @@
 import { reactive } from 'vue';
-import { email, helpers, minLength, required } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import { routes } from '@/router.ts';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth.ts';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+import { useVuelidate } from '@vuelidate/core';
+import { email, helpers, minLength, required } from '@vuelidate/validators';
+import { routes } from '@/router.ts';
+import { useAuthStore } from '@/stores/auth.ts';
 
 export const useRegister = () => {
   const router = useRouter();

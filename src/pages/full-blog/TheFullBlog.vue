@@ -47,6 +47,11 @@ const { post, errorRequestPost, statusRequestPost } = useFullBlog();
   gap: 40px;
   background: var(--white-color);
   border-radius: 10px;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .img {
@@ -55,6 +60,11 @@ const { post, errorRequestPost, statusRequestPost } = useFullBlog();
   flex-shrink: 0;
   border-radius: 5px;
   overflow: hidden;
+
+  @media (max-width: 576px) {
+    width: 280px;
+    height: 200px;
+  }
 
   img {
     width: 100%;

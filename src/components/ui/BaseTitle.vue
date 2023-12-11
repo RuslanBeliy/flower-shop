@@ -55,6 +55,16 @@ const classes = computed(() => {
   &::before {
     transform: translate(-200px, 15px);
   }
+
+  @media (max-width: 768px) {
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+  }
 }
 
 .center {

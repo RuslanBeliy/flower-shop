@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { IFlower } from '@/types/flowers.ts';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import { routes } from '@/router.ts';
-import { computed } from 'vue';
 import { formatCurrency } from '@/utils/formatCurrency.ts';
 
 interface Props extends Pick<IFlower, 'imageUrl' | 'name' | 'price' | '_id'> {
@@ -46,16 +46,17 @@ const onClick = () => {
 </template>
 
 <style scoped lang="scss">
-@import '../../styles/mixins';
-
 .flower-card {
-  max-width: 290px;
   height: 100%;
   background: var(--white-color);
   border-radius: 5px;
   overflow: hidden;
+  transition: all 0.3s ease-in-out;
 
-  @include card-hover;
+  &:hover {
+    box-shadow: var(--shadow);
+    transform: scale(1.02);
+  }
 }
 
 .link-to {

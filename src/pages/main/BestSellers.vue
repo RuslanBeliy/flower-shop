@@ -15,6 +15,13 @@ import { useCartStore } from '@/stores/cart.ts';
 const { flowers, requestFlowers, errorRequestFlowers, statusRequestFlowers } =
   useBestSellers();
 const { addItemToCart } = useCartStore();
+
+let countSliders = 4;
+const screenWidth = window.innerWidth;
+
+if (screenWidth <= 992) countSliders = 3;
+if (screenWidth <= 768) countSliders = 2;
+if (screenWidth <= 576) countSliders = 1;
 </script>
 
 <template>
@@ -31,7 +38,7 @@ const { addItemToCart } = useCartStore();
     <Swiper
       v-else
       :modules="[Pagination, A11y, Autoplay]"
-      :slides-per-view="4"
+      :slides-per-view="countSliders"
       :space-between="20"
       autoplay
       :pagination="{ clickable: true }"

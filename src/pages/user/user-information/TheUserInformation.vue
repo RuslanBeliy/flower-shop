@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseUserPanel from '@/components/ui/BaseUserPanel.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseInput from '@/components/ui/BaseInput.vue';
 import BaseAvatar from '@/components/ui/BaseAvatar.vue';
 import { useAuthStore } from '@/stores/auth.ts';
-import { storeToRefs } from 'pinia';
 import { useUserInformation } from '@/pages/user/user-information/hooks/useUserInformation.ts';
-import { ref } from 'vue';
 
 const store = useAuthStore();
 const { user, statusUpdateUser } = storeToRefs(store);
@@ -83,6 +83,11 @@ const uploadImg = () => {
   gap: 50px;
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .left {

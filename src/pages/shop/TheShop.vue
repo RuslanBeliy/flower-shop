@@ -74,6 +74,16 @@ const { addItemToCart } = useCartStore();
   gap: 20px;
   grid-template-columns: repeat(4, minmax(200px, 1fr));
   margin: 40px 0;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+  }
 }
 
 .list-enter-active {

@@ -1,10 +1,10 @@
-import { useFetch } from '@/hooks/useFetch.ts';
 import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { useFetch } from '@/hooks/useFetch.ts';
 import { addComment, fetchFlowerById } from '@/api/requests/flowers.ts';
 import { IFlower } from '@/types/flowers.ts';
-import { useRoute } from 'vue-router';
-import { required } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
 
 export const useFullInfoShop = () => {
   const flower = ref<IFlower>();

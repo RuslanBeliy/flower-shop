@@ -48,6 +48,11 @@ import BaseLogo from '@/components/ui/BaseLogo.vue';
 .wrap {
   display: flex;
   gap: 100px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 50px;
+  }
 }
 
 .logo-block {

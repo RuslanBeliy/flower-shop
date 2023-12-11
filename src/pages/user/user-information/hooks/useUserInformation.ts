@@ -1,9 +1,9 @@
-import { useAuthStore } from '@/stores/auth.ts';
 import { storeToRefs } from 'pinia';
 import { reactive, ref } from 'vue';
-import { RegisterRequest, uploadAvatar } from '@/api/requests/auth.ts';
 import { email, helpers, minLength, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+import { useAuthStore } from '@/stores/auth.ts';
+import { RegisterRequest, uploadAvatar } from '@/api/requests/auth.ts';
 import { useFetch } from '@/hooks/useFetch.ts';
 
 const API_URL = import.meta.env.VITE_API_URL;

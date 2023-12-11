@@ -14,22 +14,22 @@ import { routes } from '@/router.ts';
       <BaseButton :to="{ name: routes.shop }">Заказать</BaseButton>
     </div>
     <div class="hero__right">
-      <div class="img">
+      <div class="hero__img">
         <img src="/hero/1.png" alt="" />
       </div>
-      <div class="img">
+      <div class="hero__img">
         <img src="/hero/2.png" alt="" />
       </div>
-      <div class="img">
+      <div class="hero__img">
         <img src="/hero/3.png" alt="" />
       </div>
-      <div class="img">
+      <div class="hero__img">
         <img src="/hero/4.png" alt="" />
       </div>
-      <div class="img">
+      <div class="hero__img">
         <img src="/hero/5.png" alt="" />
       </div>
-      <div class="img">
+      <div class="hero__img">
         <img src="/hero/6.png" alt="" />
       </div>
     </div>
@@ -40,6 +40,10 @@ import { routes } from '@/router.ts';
 .hero {
   padding: 70px 0 100px;
   display: flex;
+
+  @media (max-width: 576px) {
+    padding: 50px 0;
+  }
 
   &__left {
     max-width: 550px;
@@ -54,6 +58,10 @@ import { routes } from '@/router.ts';
     line-height: normal;
 
     margin-bottom: 35px;
+
+    @media (max-width: 576px) {
+      font-size: 40px;
+    }
   }
 
   &__descr {
@@ -67,6 +75,28 @@ import { routes } from '@/router.ts';
     justify-content: end;
     gap: 20px;
     flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__img {
+    @media (max-width: 1200px) {
+      &:nth-child(5),
+      &:nth-child(6) {
+        display: none;
+      }
+    }
+    @media (max-width: 992px) {
+      &:nth-child(3),
+      &:nth-child(4) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 576px) {
+    }
   }
 }
 </style>

@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import UserIcon from '@/components/icons/UserIcon.vue';
 import CartIcon from '@/components/icons/CartIcon.vue';
-import { routes } from '@/router.ts';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseLogo from '@/components/ui/BaseLogo.vue';
+import BaseBurger from '@/components/ui/BaseBurger.vue';
 import { useCartStore } from '@/stores/cart.ts';
+import { routes } from '@/router.ts';
+
 const store = useCartStore();
+
+const isShowMobileMenu = ref(false);
+
+const closeMobileMenu = () => (isShowMobileMenu.value = false);
 </script>
 
 <template>
@@ -13,16 +20,22 @@ const store = useCartStore();
     <BaseContainer class="wrap">
       <BaseLogo />
 
-      <nav class="nav">
+      <nav class="nav" :class="{ show: isShowMobileMenu }">
         <ul class="nav__list">
           <li>
-            <RouterLink :to="{ name: routes.main }">Главная</RouterLink>
+            <RouterLink :to="{ name: routes.main }" @click="closeMobileMenu"
+              >Главная</RouterLink
+            >
           </li>
           <li>
-            <RouterLink :to="{ name: routes.shop }">Магазин</RouterLink>
+            <RouterLink :to="{ name: routes.shop }" @click="closeMobileMenu"
+              >Магазин</RouterLink
+            >
           </li>
           <li>
-            <RouterLink :to="{ name: routes.blog }">Блог</RouterLink>
+            <RouterLink :to="{ name: routes.blog }" @click="closeMobileMenu"
+              >Блог</RouterLink
+            >
           </li>
         </ul>
       </nav>
@@ -35,6 +48,10 @@ const store = useCartStore();
           <CartIcon />
           <span v-if="!store.isEmptyCart">{{ store.countItemsCart }}</span>
         </RouterLink>
+        <BaseBurger
+          :value="isShowMobileMenu"
+          @is-open="isShowMobileMenu = $event"
+        />
       </div>
     </BaseContainer>
   </header>
@@ -58,10 +75,33 @@ const store = useCartStore();
 }
 
 .nav {
+  @media (max-width: 576px) {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+    transition: all 0.3s ease;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   &__list {
     display: flex;
     align-items: center;
     gap: 23px;
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+      font-size: 30px;
+      color: #fff;
+    }
 
     a {
       transition: color 0.2s ease-in-out;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { ref, computed, watch } from 'vue';
 import FilterIcon from '@/components/icons/FilterIcon.vue';
 import SortIcon from '@/components/icons/SortIcon.vue';
 import SearchIcon from '@/components/icons/SearchIcon.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import { filterFlowers } from '@/constants';
-import { ref, computed, watch } from 'vue';
 import { debounce } from '@/utils/debounce.ts';
 
 interface Props {
@@ -109,11 +109,19 @@ watch(showFilter, (newValue) => {
   color: var(--black-color);
   font-size: 18px;
   line-height: normal;
+
+  @media (max-width: 576px) {
+    flex-direction: column-reverse;
+  }
 }
 
 .filter {
   position: relative;
   width: 150px;
+
+  @media (max-width: 576px) {
+    width: auto;
+  }
   &__btn {
     display: flex;
     align-items: center;
@@ -154,6 +162,10 @@ watch(showFilter, (newValue) => {
   position: relative;
   width: 490px;
 
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+
   input {
     width: 100%;
     height: 100%;
@@ -179,6 +191,9 @@ watch(showFilter, (newValue) => {
   justify-content: end;
   gap: 5px;
   width: 150px;
+  @media (max-width: 576px) {
+    width: auto;
+  }
 }
 
 .v-enter-active {

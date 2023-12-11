@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import BaseContainer from '@/components/ui/BaseContainer.vue';
 import BaseAuth from '@/components/ui/BaseAuth.vue';
 import BaseInput from '@/components/ui/BaseInput.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import { routes } from '@/router.ts';
 import { useAuthStore } from '@/stores/auth';
-import { storeToRefs } from 'pinia';
 import { useLogin } from '@/pages/login/hooks/useLogin.ts';
 
 const store = useAuthStore();

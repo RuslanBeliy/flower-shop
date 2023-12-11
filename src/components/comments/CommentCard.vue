@@ -29,7 +29,6 @@ defineProps<Props>();
   display: flex;
   flex-direction: column;
   padding: 20px 20px 20px 100px;
-  max-width: 385px;
   height: 100%;
   background: var(--white-color);
 }

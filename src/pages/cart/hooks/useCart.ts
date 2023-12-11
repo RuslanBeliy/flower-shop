@@ -1,8 +1,8 @@
-import { useCartStore } from '@/stores/cart.ts';
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { useCartStore } from '@/stores/cart.ts';
 import { useFetch } from '@/hooks/useFetch.ts';
 import { postOrder } from '@/api/requests/orders.ts';
-import { useRouter } from 'vue-router';
 import { routes } from '@/router.ts';
 
 export const useCart = () => {

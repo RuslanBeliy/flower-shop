@@ -38,6 +38,11 @@ defineProps<Props>();
 .left {
   width: 450px;
   padding: 30px 50px;
+
+  @media (max-width: 576px) {
+    width: 100%;
+    padding: 20px;
+  }
 }
 
 .header {
@@ -50,6 +55,13 @@ defineProps<Props>();
 
 .img {
   width: 450px;
+
+  @media (max-width: 992px) {
+    width: auto;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 
   img {
     width: 100%;

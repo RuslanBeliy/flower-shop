@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import TrashIcon from '@/components/icons/TrashIcon.vue';
 import { ICart } from '@/stores/cart.ts';
 import { formatCurrency } from '@/utils/formatCurrency.ts';
-import { computed } from 'vue';
 
 interface Props
   extends Pick<ICart, 'name' | 'imageUrl' | 'countItems' | 'price'> {}
@@ -66,9 +66,14 @@ const count = (e: Event) => {
   display: flex;
   gap: 30px;
 
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+
   &__img {
     width: 146px;
     height: 146px;
+    flex-shrink: 0;
     border-radius: 5px;
     overflow: hidden;
 

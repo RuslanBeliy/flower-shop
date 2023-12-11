@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import EyeIcon from '@/components/icons/EyeIcon.vue';
 import BaseTitle from '@/components/ui/BaseTitle.vue';
-import { computed } from 'vue';
 import { routes } from '@/router.ts';
 import { IPost } from '@/types/posts.ts';
 import { textCropping } from '@/utils/textСropping.ts';
@@ -20,7 +20,7 @@ const cropedText = computed(() => textCropping(props.text, 50) + '...');
 <template>
   <li class="post-card">
     <div class="img">
-      <img :src="imageUrl" alt="" />
+      <img :src="imageUrl" :alt="title" />
     </div>
     <div class="info">
       <BaseTitle>{{ title }}</BaseTitle>
@@ -40,6 +40,8 @@ const cropedText = computed(() => textCropping(props.text, 50) + '...');
 
 <style scoped lang="scss">
 .post-card {
+  display: flex;
+  flex-direction: column;
   background: var(--white-color);
   border-radius: 5px;
   overflow: hidden;
@@ -56,6 +58,9 @@ const cropedText = computed(() => textCropping(props.text, 50) + '...');
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   padding: 15px;
 
   &__descr {
@@ -64,6 +69,7 @@ const cropedText = computed(() => textCropping(props.text, 50) + '...');
   }
 
   &__bottom {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;

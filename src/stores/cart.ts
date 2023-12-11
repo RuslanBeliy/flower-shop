@@ -1,6 +1,6 @@
+import { computed, ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { IFlower } from '@/types/flowers.ts';
-import { computed, ref, watch } from 'vue';
 
 const KEY_CART = 'cart';
 export interface ICart extends IFlower {
